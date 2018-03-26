@@ -1,76 +1,303 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>Example app</title>
-    <meta name="description" content="" />
-    <link href="css/styles.css" rel="stylesheet">
-    <link href="css/gradients.css" rel="stylesheet">
+	<title>NHL Stats JSON Angular test</title>
+	<meta charset="UTF-8">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link href="css/style.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
+	
+<body ng-app="myApp" ng-controller="NHLDataCtrl">
+	
+	
 
-<body class="">
-    <div class="wrapper">
-        <div class="graphics">
-            <div class="tower">
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                     viewBox="-11 170 1000 429" enable-background="new -11 170 1000 429" xml:space="preserve">
-                    <path class="path" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M989,595H712v-35c0,0,4.5-1.8,8-3
-                                                                                                  c5.2-1.8,12.5,5.3,22-4c3.4-3.4-0.9-7.8-0.4-10.1c0.7-3.1,4.4-6.8,1.6-11.4c-2.6-4.2-6.9-3.6-8.2-5.5c-1.7-2.3-2.2-6.3-7-9
-                                                                                                  c-5.6-3.1-9.9,0.2-13-1c-2.5-0.9-2.3-5-9-5c-4.8,0-7.2,4.8-10,5c-2.3,0.2-4.9-4.5-10-2c-5.5,2.8-4,7.3-6,9c-1.4,1.2-3.1,3.2-6,4.2
-                                                                                                  c-2.6,0.9-4.9,3-4,8.8c0.6,3.7,6.8,4.1,7.5,6c1,2.9-6.4,6.2-2.5,12c3,4.5,9,1.6,12,1c1.9-0.4,7.1-0.7,8,0c3.4,2.5,9,5,9,5v35
-                                                                                                  l-506-1.5L182.3,444l0.3-0.8v-69.6l-0.2-0.2l12.3-72.3c10.9-2.6,16.5-6.5,16.5-6.5l-5.2-2.9l1.1-5.8l15-3.3l-10.1-3.9l1.2-4.6
-                                                                                                  c-15.8-8.3-32.2-11-32.2-11v-3.6l4.1-6.5h-4.9v-4.4h-8.3V244h-1.2l-1.7-31.2l-1-1.3l-1,1.3l-1.7,31.2h-1.2v4.8h-8.3v4.4h-4.9
-                                                                                                  l4.1,6.5v3.6c0,0-16.5,2.7-32.2,11l1.2,4.6l-10.1,3.9l15,3.3l1.1,5.8l-5.1,2.9c0,0,5.5,3.9,16.4,6.5l12.3,72.4l-0.1,0.1v69.6
-                                                                                                  l0.3,0.8l-14.6,149.4h-1.2H-11"/>
-                    <path class="path" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M8,393.7c0-13.5,12.1-10.8,15.6-14.7
-                                                                                                  c2.8-3.2-1-8.8,9-13.9c7.9-4.1,9.7,1,13.1,0.8c4.5-0.3,3.3-6.7,14.7-6.6c12.7,0.2,11.2,8.4,14.7,10.6c3,1.9,7.9-2.1,13.9,4.1
-                                                                                                  c3.8,4,1.3,7.4,2.5,9.8c2.2,4.4,14.7,0.9,14.7,13.9c0,12.2-13.5,8.3-17.2,10.6c-3.6,2.3-4.4,9.3-13.1,11.5c-8,2-9.5-4-13.9-4.1
-                                                                                                  c-5-0.1-5.5,8.6-18.8,6.6c-12.3-1.9-12.3-9.1-16.4-12.3C21.9,406.3,8,408.6,8,393.7z"/>
-                    <path class="path" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M325.1,313.9c-3.9,3-3.9,10-15.7,11.8
-                                                                                                  c-12.8,2-13.3-6.4-18-6.3c-4.3,0.1-5.7,5.8-13.3,3.9c-8.4-2.1-9.1-8.8-12.5-11c-3.6-2.3-16.5,1.5-16.5-10.2c0-12.4,12-9.1,14.1-13.3
-                                                                                                  c1.1-2.3-1.3-5.6,2.4-9.4c5.8-6,10.4-2.1,13.3-3.9c3.4-2.1,2-10,14.1-10.2c11-0.2,9.9,6,14.1,6.3c3.3,0.2,5-4.7,12.5-0.8
-                                                                                                  c9.6,4.9,6,10.3,8.6,13.3c3.3,3.7,14.9,1.2,14.9,14.1C343.1,312.5,329.8,310.3,325.1,313.9z"/>
-                    <path class="path" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M18.4,229.5c0-13.5,12.1-10.8,15.6-14.7
-                                                                                                  c2.8-3.2-1-8.8,9-13.9c7.9-4.1,9.7,1,13.1,0.8c4.5-0.3,3.3-6.7,14.7-6.6c12.7,0.2,11.2,8.4,14.7,10.6c3,1.9,7.9-2.1,13.9,4.1
-                                                                                                  c3.8,4,1.3,7.4,2.5,9.8c2.2,4.4,14.7,0.9,14.7,13.9c0,12.2-13.5,8.3-17.2,10.6c-3.6,2.3-4.4,9.3-13.1,11.5c-8,2-9.5-4-13.9-4.1
-                                                                                                  c-5-0.1-5.5,8.6-18.8,6.6c-12.3-1.9-12.3-9.1-16.4-12.3C32.2,242.1,18.4,244.4,18.4,229.5z"/>
-                    <path class="path" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M215.8,398.8c0-13.5,12.1-10.8,15.6-14.7
-                                                                                                  c2.8-3.2-1-8.8,9-13.9c7.9-4.1,9.7,1,13.1,0.8c4.5-0.3,3.3-6.7,14.7-6.6c12.7,0.2,11.2,8.4,14.7,10.6c3,1.9,7.9-2.1,13.9,4.1
-                                                                                                  c3.8,4,1.3,7.4,2.5,9.8c2.2,4.4,14.7,0.9,14.7,13.9c0,12.2-13.5,8.3-17.2,10.6c-3.6,2.3-4.4,9.3-13.1,11.5c-8,2-9.5-4-13.9-4.1
-                                                                                                  c-5-0.1-5.5,8.6-18.8,6.6c-12.3-1.9-12.3-9.1-16.4-12.3C229.7,411.3,215.8,413.6,215.8,398.8z"/>
-                </svg>
+	<!-- HEADER -->
+	<section id="header" class="section">
+		<header>
+			<div class="bigHeaderText">
+				<h1>NHL Fanatic Fans App</h1>
+				<select class="select" ng-model="teams.abbreviation" ng-options="abbreviation.pick as abbreviation.display for abbreviation in teamPicker | orderBy: 'display'" ng-change="valueSelected(teams)" ng-init="teams.abbreviation ='ANA'">
+				</select>
+			</div>
+			<div ng-repeat="club in myData | filter : teams">
+				<div id="logoLeft" class="teamLogo">
+					<img src="https://www-league.nhlstatic.com/builds/site-core/86d4b76cc03a4d111ee0e20f9f62eb054eef3b74_1502985652/images/logos/team/current/team-{{club.id}}-light.svg"/>
+				</div>
+				<div id="logoRight" class="teamLogo">
+					<img src="https://www-league.nhlstatic.com/builds/site-core/86d4b76cc03a4d111ee0e20f9f62eb054eef3b74_1502985652/images/logos/team/current/team-{{club.id}}-light.svg"/>
+				</div>
+			</div>
+		</header>
+	</section>
 
-            </div>
-        </div>
+	
+	<!-- TEAM INTRO -->
+	<section class="section">
+		<div id="intro" class="club NHLDataContent" ng-repeat="club in myData | filter : teams" ng-class="club.abbreviation">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xl-12">
+						<h1>{{club.name}}</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- ROSTER -->
+	<section class="section">
+			<div id="roster" class="NHLDataContent" ng-repeat="club in myData | filter : teams">
+				<div class="container-fluid">
+					<h2>Team Roster</h2>
+					<div id="haku" class="container-1">
+							<span id="hakuikoni" class="icon"><i class="fa fa-search"></i></span>
+							<input type="search" id="hakukentta" placeholder="Search for player..." ng-model="playerSearch"/>
+					</div><br/>
+					<div class="filters">
+						<select class="sel" ng-model="typeFilter" ng-options="type as type for type in types">
+							<option value="">All Positions</option>
+						</select>
+						<select class="sel" ng-model="posFilter" ng-options="name as name for name in positions">
+							<option value="">Forward Type</option>
+						</select>
+						<select class="sel" ng-model="countryFilter" ng-options="nationality as nationality for nationality in countries">
+							<option value="">Nationality</option>
+						</select>
+					</div>																													
+					<div class="playerProfile row">
+							<div class="club singlePlayer col-xl-4 col-lg-6 col-md-6 col-sm-12 col-xs-12" ng-repeat="players in club.roster.roster | filter : (!!posFilter || undefined) && posFilter | filter : (!!typeFilter || undefined) && typeFilter | filter : (!!countryFilter || undefined) && countryFilter | filter : playerSearch | orderBy : 'person.lastName'" ng-if="players.person.rosterStatus == 'Y'">
+										<div ng-repeat="a in players.person.stats">
+											<div ng-repeat="b in a.splits">
+												<div class="beforeStatsTable">
+													<h3>{{ players.person.fullName }}</h3>
+													<div class="playerPicture">
+														<img src="https://nhl.bamcontent.com/images/headshots/current/168x168/{{players.person.id}}.jpg"/>
+													</div>
+													<table class="table playerStrengths">
+														<tbody>
+															<tr>
+																<td class="inFlames" id="eliteSuperStarF" ng-if="b.stat.points >= 80 && players.person.primaryPosition.type == 'Forward'">
+																	<i class="fa fa-star fa-2x"></i>
+																	<i class="fa fa-star fa-2x"></i>
+																	<i class="fa fa-star fa-2x"></i>
+																</td>
+																<td class="inFlames" id="eliteSuperStarD" ng-if="b.stat.points >= 60 && players.person.primaryPosition.type == 'Defenseman'">
+																	<i class="fa fa-star fa-2x"></i>
+																	<i class="fa fa-star fa-2x"></i>
+																	<i class="fa fa-star fa-2x"></i>
+																</td>
+																<td class="inFlames" id="superStarF" ng-if="b.stat.points >= 65 && b.stat.points <= 79 && players.person.primaryPosition.type == 'Forward'">
+																	<i class="fa fa-star fa-2x"></i>
+																	<i class="fa fa-star fa-2x"></i>
+																</td>
+																<td class="inFlames" id="superStarD" ng-if="b.stat.points >= 45 && b.stat.points <= 59 && players.person.primaryPosition.type == 'Defenseman'">
+																	<i class="fa fa-star fa-2x"></i>
+																	<i class="fa fa-star fa-2x"></i>
+																</td>
+																<td class="inFlames" id="starF" ng-if="b.stat.points >= 40 && b.stat.points <= 64 && players.person.primaryPosition.type == 'Forward'">
+																	<i class="fa fa-star fa-2x"></i>
+																</td>
+																<td class="inFlames" id="starD" ng-if="b.stat.points >= 30 && b.stat.points <= 44 && players.person.primaryPosition.type == 'Defenseman'">
+																	<i class="fa fa-star fa-2x"></i>
+																</td>
+																<td class="inFlames" id="basicF" ng-if="b.stat.points <= 39 && players.person.primaryPosition.type == 'Forward'">
+																	<i class="fa fa-check fa-2x"></i>
+																</td>
+																<td class="inFlames" id="basicD" ng-if="b.stat.points <= 29 && players.person.primaryPosition.type == 'Defenseman'">
+																	<i class="fa fa-check fa-2x"></i>
+																</td>
+																<td class="inFlames" id="eliteSuperStarG" ng-if="b.stat.savePercentage >= 0.928 && b.stat.games >= 30 && players.person.primaryPosition.type == 'Goalie'">
+																	<i class="fa fa-star fa-2x"></i>
+																	<i class="fa fa-star fa-2x"></i>
+																	<i class="fa fa-star fa-2x"></i>
+																</td>
+																<td class="inFlames" ng-if="b.stat.savePercentage >= 0.928 && b.stat.games < 20 && players.person.primaryPosition.type == 'Goalie'">
+																	<i class="fa fa-star fa-2x"></i>
+																	<i class="fa fa-star fa-2x"></i>
+																</td>
+																<td class="inFlames" ng-if="b.stat.savePercentage >= 0.915 && b.stat.savePercentage <= 0.927 && players.person.primaryPosition.type == 'Goalie'">
+																	<i class="fa fa-star fa-2x"></i>
+																	<i class="fa fa-star fa-2x"></i>
+																</td>
+																<td class="inFlames" id="starG" ng-if="b.stat.savePercentage >= 0.900 && b.stat.savePercentage <= 0.914 && players.person.primaryPosition.type == 'Goalie'">
+																	<i class="fa fa-star fa-2x"></i>
+																</td>
+																<td class="inFlames" id="basicG" ng-if="b.stat.savePercentage <= 0.899 && players.person.primaryPosition.type == 'Goalie'">
+																	<i class="fa fa-check fa-2x"></i>
+																</td>
+																<td class="inFlames" id="sniperF" ng-if="b.stat.goals >= 30 && players.person.primaryPosition.type == 'Forward'">
+																	<i class="fa fa-crosshairs fa-2x"></i>
+																</td>
+																<td class="inFlames" id="sniperD" ng-if="b.stat.goals >= 10 && players.person.primaryPosition.type == 'Defenseman'">
+																	<i class="fa fa-crosshairs fa-2x"></i>
+																</td>
+																<td class="inFlames" id="playmakerF" ng-if="b.stat.assists >= 37 && players.person.primaryPosition.type == 'Forward'">
+																	<i class="fa fa-eye fa-2x"></i>
+																</td>
+																<td class="inFlames" id="playmakerD" ng-if="b.stat.assists >= 27 && players.person.primaryPosition.type == 'Defenseman'">
+																	<i class="fa fa-eye fa-2x"></i>
+																</td>
+																<td class="inFlames" id="twoWayF" ng-if="b.stat.plusMinus >= -1 && b.stat.pim <= 45 && b.stat.points >= 35 && b.stat.shortHandedTimeOnIcePerGame >= '01:20' || b.stat.plusMinus >= 25">
+																	<i class="fa fa-balance-scale fa-2x"></i>
+																</td>
+																<td class="inFlames" id="hitter" ng-if="b.stat.hits >= 130">
+																	<i class="fa fa-bomb fa-2x"></i>
+																</td>
+																<td class="inFlames" id="winner" ng-if="b.stat.gameWinningGoals >= 10 || b.stat.overTimeGoals >= 2 || b.stat.shortHandedGoals >= 5">
+																	<i class="fa fa-heart fa-2x"></i>
+																</td>
+																<td class="inFlames" id="defender" ng-if="b.stat.plusMinus >= 0 && players.person.primaryPosition.type == 'Defenseman' && b.stat.blocked >= 100">
+																	<i class="fa fa-shield fa-2x"></i>
+																</td>
+																<td class="inFlames" id="hardWorker" ng-if="b.stat.timeOnIcePerGame >= '23:00' && players.person.primaryPosition.type != 'Goalie'">
+																	<i class="fa fa-plug fa-2x"></i>
+																</td>
+																<td class="inFlames" id="youngStarF" ng-if="players.person.currentAge <= 23 && b.stat.points >= 40 && players.person.primaryPosition.type == 'Forward'">
+																	<i class="fa fa-diamond fa-2x"></i>
+																</td>
+																<td class="inFlames" id="youngStarG" ng-if="players.person.currentAge <= 23 && b.stat.savePercentage >= 0.93 && players.person.primaryPosition.type == 'Goalie'">
+																	<i class="fa fa-diamond fa-2x"></i>
+																</td>
+																<td class="inFlames" id="youngStarD" ng-if="players.person.currentAge <= 23 && b.stat.plusMinus >= -5 && b.stat.points >= 20 && players.person.primaryPosition.type == 'Defenseman'">
+																	<i class="fa fa-diamond fa-2x"></i>
+																</td>
+																<td class="inFlames" ng-if="b.stat.goalAgainstAverage <= 2.5 && players.person.primaryPosition.type == 'Goalie'">
+																	<i class="fa fa-magnet fa-2x"></i>
+																</td>
+															</tr>
+														</tbody>	
+													</table>
+													<div class="personalInfo col-xl-12">
+														<p class="info">{{ players.person.primaryPosition.type }}  [  {{ players.person.primaryPosition.abbreviation }} ]</p>
+														<p class="info">Jersey number: {{ players.jerseyNumber }}</p>
+														<p class="info">Age: {{ players.person.currentAge }}</p>
+														<p class="info">Nationality: {{ players.person.nationality }}</p>
+														<p class="info">Shoots: {{ players.person.shootsCatches }}</p>
+													</div>
+												</div>
+												<table class="table">
+														<tbody ng-if="players.person.primaryPosition.type != 'Goalie'">
+															<tr>
+																<th>Gms</th>
+																<th>G</th>
+																<th>A</th>
+																<th>P</th>
+																<th>+/-</th>
+																<th>H</th>
+																<th>Pim</th>
+															</tr>
+															<tr>
+																<td> {{ b.stat.games }} </td>
+																<td> {{ b.stat.goals }} </td>
+																<td> {{ b.stat.assists }} </td>
+																<td> {{ b.stat.points }} </td>
+																<td> {{ b.stat.plusMinus }} </td>
+																<td> {{ b.stat.hits }} </td>
+																<td> {{ b.stat.pim }} </td>
+															</tr>
+														</tbody>												
+														<tbody ng-if="players.person.primaryPosition.type == 'Goalie'">
+															<tr>
+																<th>Gms</th>
+																<th>W</th>
+																<th>L</th>
+																<th>OT</th>
+																<th>S%</th>
+																<th>GA/Gm</th>
+															</tr>
+															<tr>
+																<td> {{ b.stat.games }} </td>
+																<td> {{ b.stat.wins }} </td>
+																<td> {{ b.stat.losses }} </td>
+																<td> {{ b.stat.ot }} </td>
+																<td> {{ b.stat.savePercentage * 100 | number : 1}}</td>
+																<td> {{ b.stat.goalAgainstAverage }} </td>
+															</tr>
+														</tbody>													
+												</table>
+											</div>
+										</div>	
+							</div>
+					</div>
+					<div class="row playerRatingsInfo">
+						<div class="infoColumn col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+									<div class="infobox">
+										<span>Elite Superstar = </span>
+										<i class="fa fa-star fa-2x"></i>
+										<i class="fa fa-star fa-2x"></i>
+										<i class="fa fa-star fa-2x"></i>
+									</div>
+									<div class="infobox">
+										<span>Superstar = </span>
+										<i class="fa fa-star fa-2x"></i>
+										<i class="fa fa-star fa-2x"></i>
+									</div>
+									<div class="infobox">
+										<span>Star = </span>
+										<i class="fa fa-star fa-2x"></i>
+									</div>
+									<div class="infobox">
+										<span>Earns spot in the roster = </span>
+										<i class="fa fa-check fa-2x"></i>
+									</div>
+						</div >
+						<div class="infoColumn col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+									<div class="infobox">
+										<span>True Sniper = </span>
+										<i class="fa fa-crosshairs fa-2x"></i>
+									</div>
+									<div class="infobox">
+										<span>Playmaker With Hands = </span>
+										<i class="fa fa-eye fa-2x"></i>
+									</div>
+									<div class="infobox">
+										<span>Two Way Game = </span>
+										<i class="fa fa-balance-scale fa-2x"></i>
+									</div>
+									<div class="infobox">
+										<span>Hard Hitter = </span>
+										<i class="fa fa-bomb fa-2x"></i>
+									</div>
+									<div class="infobox">
+										<span>Puck Magnet = </span>
+										<i class="fa fa-magnet fa-2x"></i>
+									</div>
+						</div>
+						<div class="infoColumn col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+									<div class="infobox">
+										<span>Great Defense = </span>
+										<i class="fa fa-shield fa-2x"></i>
+									</div>
+									<div class="infobox">
+										<span>Winner And Teams Spirit = </span>
+										<i class="fa fa-heart fa-2x"></i>
+									</div>
+									<div class="infobox">
+										<span>Plays High Minutes = </span>
+										<i class="fa fa-plug fa-2x"></i>
+									</div>
+									<div class="infobox">
+										<span>Potential Young Star = </span>
+										<i class="fa fa-diamond fa-2x"></i>
+									</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+	
+	
+	
+					
 
-        <header>
-            <nav class="website-nav">
-                <ul>
-                    <li><a class="home-link" href="https://aws.amazon.com/">Home</a></li>
-                    <li><a href="https://aws.amazon.com/what-is-cloud-computing/">About</a></li>
-                    <li><a href="https://aws.amazon.com/solutions/">Services</a></li>
-                    <li><a href="https://aws.amazon.com/contact-us/">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
 
-        <div class="message">
-            <a class="twitter-link" href="http://twitter.com/home/?status=I%20created%20a%20project%20with%20AWS%20CodeStar!%20%23AWS%20%23AWSCodeStar%20https%3A%2F%2Faws.amazon.com%2Fcodestar"><img src="img/tweet.svg" /></a>
-            <div class="text">
-                <h1>Congratulations!</h1>
-                <h2>You just created an HTML5 web application</h2>
-            </div>
-        </div>
-    </div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/myscripts.js"></script>
 
-    <footer>
-        <p class="footer-contents">Designed and developed with
-            <a href="https://aws.amazon.com/careers/devtools-jobs/">♥</a> in Seattle.
-        </p>
-    </footer>
-
-    <script src="js/set-background.js"></script>
 </body>
-
 </html>
