@@ -21,7 +21,7 @@
 				<select class="select" ng-model="teams.abbreviation" ng-options="abbreviation.pick as abbreviation.display for abbreviation in teamPicker | orderBy: 'display'" ng-change="valueSelected(teams)" ng-init="teams.abbreviation ='ANA'">
 				</select>
 			</div>
-			<div ng-repeat="club in myData | filter : teams">
+			<div ng-repeat="club in myPlayersData | filter : teams">
 				<div id="logoLeft" class="teamLogo">
 					<img src="https://www-league.nhlstatic.com/builds/site-core/86d4b76cc03a4d111ee0e20f9f62eb054eef3b74_1502985652/images/logos/team/current/team-{{club.id}}-light.svg"/>
 				</div>
@@ -35,7 +35,7 @@
 	
 	<!-- TEAM INTRO -->
 	<section class="section">
-		<div id="intro" class="club NHLDataContent" ng-repeat="club in myData | filter : teams" ng-class="club.abbreviation">
+		<div id="intro" class="club NHLDataContent" ng-repeat="club in myPlayersData | filter : teams" ng-class="club.abbreviation">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xl-12">
@@ -46,12 +46,24 @@
 		</div>
 	</section>
 	
+	
+	
+	<!-- TEAM STATS -->
+	<!--<section class="section">
+			<div id="teamStats" class="club NHLDataContent" ng-repeat="club in myTeamData | filter : teams" ng-class="club.abbreviation">
+				<div class="container-fluid" ng-repeat="s in club.teamStats">
+					
+				</div>
+			</div>
+	</section>-->
+	
+	
 	<!-- ROSTER -->
 	<section class="section">
-			<div id="roster" class="NHLDataContent" ng-repeat="club in myData | filter : teams">
+			<div id="roster" class="NHLDataContent" ng-repeat="club in myPlayersData | filter : teams">
 				<div class="container-fluid">
 					<h2>Team Roster</h2>
-					<div id="haku" class="container-1">
+					<div id="haku">
 							<span id="hakuikoni" class="icon"><i class="fa fa-search"></i></span>
 							<input type="search" id="hakukentta" placeholder="Search for player..." ng-model="playerSearch"/>
 					</div><br/>
@@ -74,119 +86,128 @@
 													<h3>{{ players.person.fullName }}</h3>
 													<div class="playerPicture">
 														<img src="https://nhl.bamcontent.com/images/headshots/current/168x168/{{players.person.id}}.jpg"/>
+														<span class="club jerseyNumber" ng-class="club.abbreviation"><p> {{players.jerseyNumber}} </p></span>
+														<span class="club captain" ng-if="players.person.captain == true" ng-class="club.abbreviation"><p> C </p></span>
+														<span class="club captain" ng-if="players.person.alternateCaptain == true" ng-class="club.abbreviation"><p> A </p></span>
 													</div>
 													<table class="table playerStrengths">
 														<tbody>
 															<tr>
-																<td class="inFlames" id="eliteSuperStarF" ng-if="b.stat.points >= 80 && players.person.primaryPosition.type == 'Forward'">
+																<td class="star inFlames" id="eliteSuperStarF" ng-if="b.stat.points >= 80 && players.person.primaryPosition.type == 'Forward'">
 																	<i class="fa fa-star fa-2x"></i>
 																	<i class="fa fa-star fa-2x"></i>
 																	<i class="fa fa-star fa-2x"></i>
 																</td>
-																<td class="inFlames" id="eliteSuperStarD" ng-if="b.stat.points >= 60 && players.person.primaryPosition.type == 'Defenseman'">
+																<td class="star inFlames" id="eliteSuperStarD" ng-if="b.stat.points >= 60 && players.person.primaryPosition.type == 'Defenseman'">
 																	<i class="fa fa-star fa-2x"></i>
 																	<i class="fa fa-star fa-2x"></i>
 																	<i class="fa fa-star fa-2x"></i>
 																</td>
-																<td class="inFlames" id="superStarF" ng-if="b.stat.points >= 65 && b.stat.points <= 79 && players.person.primaryPosition.type == 'Forward'">
+																<td class="star inFlames" id="superStarF" ng-if="b.stat.points >= 60 && b.stat.points <= 79 && players.person.primaryPosition.type == 'Forward'">
 																	<i class="fa fa-star fa-2x"></i>
 																	<i class="fa fa-star fa-2x"></i>
 																</td>
-																<td class="inFlames" id="superStarD" ng-if="b.stat.points >= 45 && b.stat.points <= 59 && players.person.primaryPosition.type == 'Defenseman'">
+																<td class="star inFlames" id="superStarD" ng-if="b.stat.points >= 45 && b.stat.points <= 59 && players.person.primaryPosition.type == 'Defenseman'">
 																	<i class="fa fa-star fa-2x"></i>
 																	<i class="fa fa-star fa-2x"></i>
 																</td>
-																<td class="inFlames" id="starF" ng-if="b.stat.points >= 40 && b.stat.points <= 64 && players.person.primaryPosition.type == 'Forward'">
+																<td class="star inFlames" id="starF" ng-if="b.stat.points >= 40 && b.stat.points <= 59 && players.person.primaryPosition.type == 'Forward'">
 																	<i class="fa fa-star fa-2x"></i>
 																</td>
-																<td class="inFlames" id="starD" ng-if="b.stat.points >= 30 && b.stat.points <= 44 && players.person.primaryPosition.type == 'Defenseman'">
+																<td class="star inFlames" id="starD" ng-if="b.stat.points >= 30 && b.stat.points <= 44 && players.person.primaryPosition.type == 'Defenseman'">
 																	<i class="fa fa-star fa-2x"></i>
 																</td>
-																<td class="inFlames" id="basicF" ng-if="b.stat.points <= 39 && players.person.primaryPosition.type == 'Forward'">
-																	<i class="fa fa-check fa-2x"></i>
+																<td class="basic inFlames" id="basicF" ng-if="b.stat.points <= 39 && players.person.primaryPosition.type == 'Forward'">
+																	<i class="fa fa-thumbs-up fa-2x"></i>
 																</td>
-																<td class="inFlames" id="basicD" ng-if="b.stat.points <= 29 && players.person.primaryPosition.type == 'Defenseman'">
-																	<i class="fa fa-check fa-2x"></i>
+																<td class="basic inFlames" id="basicD" ng-if="b.stat.points <= 29 && b.stat.points >= 0 && players.person.primaryPosition.type == 'Defenseman'">
+																	<i class="fa fa-thumbs-up fa-2x"></i>
 																</td>
-																<td class="inFlames" id="eliteSuperStarG" ng-if="b.stat.savePercentage >= 0.928 && b.stat.games >= 30 && players.person.primaryPosition.type == 'Goalie'">
+																<td class="star inFlames" id="eliteSuperStarG" ng-if="b.stat.savePercentage >= 0.928 && b.stat.games >= 30 && players.person.primaryPosition.type == 'Goalie'">
 																	<i class="fa fa-star fa-2x"></i>
-																	<i class="fa fa-star fa-2x"></i>
-																	<i class="fa fa-star fa-2x"></i>
-																</td>
-																<td class="inFlames" ng-if="b.stat.savePercentage >= 0.928 && b.stat.games < 20 && players.person.primaryPosition.type == 'Goalie'">
 																	<i class="fa fa-star fa-2x"></i>
 																	<i class="fa fa-star fa-2x"></i>
 																</td>
-																<td class="inFlames" ng-if="b.stat.savePercentage >= 0.915 && b.stat.savePercentage <= 0.927 && players.person.primaryPosition.type == 'Goalie'">
+																<td class="star inFlames" ng-if="b.stat.savePercentage >= 0.928 && b.stat.games < 20 && players.person.primaryPosition.type == 'Goalie'">
 																	<i class="fa fa-star fa-2x"></i>
 																	<i class="fa fa-star fa-2x"></i>
 																</td>
-																<td class="inFlames" id="starG" ng-if="b.stat.savePercentage >= 0.900 && b.stat.savePercentage <= 0.914 && players.person.primaryPosition.type == 'Goalie'">
+																<td class="star inFlames" ng-if="b.stat.savePercentage >= 0.917 && b.stat.savePercentage <= 0.927 && players.person.primaryPosition.type == 'Goalie'">
+																	<i class="fa fa-star fa-2x"></i>
 																	<i class="fa fa-star fa-2x"></i>
 																</td>
-																<td class="inFlames" id="basicG" ng-if="b.stat.savePercentage <= 0.899 && players.person.primaryPosition.type == 'Goalie'">
-																	<i class="fa fa-check fa-2x"></i>
+																<td class="star inFlames" id="starG" ng-if="b.stat.savePercentage >= 0.905 && b.stat.savePercentage <= 0.916 && players.person.primaryPosition.type == 'Goalie'">
+																	<i class="fa fa-star fa-2x"></i>
 																</td>
-																<td class="inFlames" id="sniperF" ng-if="b.stat.goals >= 30 && players.person.primaryPosition.type == 'Forward'">
-																	<i class="fa fa-crosshairs fa-2x"></i>
+																<td class="basic inFlames" id="basicG" ng-if="b.stat.savePercentage <= 0.904 && b.stat.savePercentage >= 0.890 && players.person.primaryPosition.type == 'Goalie'">
+																	<i class="fa fa-thumbs-up fa-2x"></i>
 																</td>
-																<td class="inFlames" id="sniperD" ng-if="b.stat.goals >= 10 && players.person.primaryPosition.type == 'Defenseman'">
-																	<i class="fa fa-crosshairs fa-2x"></i>
+																<td class="bad inFlames" id="badG" ng-if="b.stat.savePercentage <= 0.889 && players.person.primaryPosition.type == 'Goalie'">
+																	<i class="fa fa-thumbs-down fa-2x"></i>
 																</td>
-																<td class="inFlames" id="playmakerF" ng-if="b.stat.assists >= 37 && players.person.primaryPosition.type == 'Forward'">
-																	<i class="fa fa-eye fa-2x"></i>
+																<td class="sniper inFlames" id="sniperF" ng-if="b.stat.goals >= 30 && players.person.primaryPosition.type == 'Forward'">
+																	<i class="fa fa-bullseye fa-2x"></i>
 																</td>
-																<td class="inFlames" id="playmakerD" ng-if="b.stat.assists >= 27 && players.person.primaryPosition.type == 'Defenseman'">
-																	<i class="fa fa-eye fa-2x"></i>
+																<td class="sniper inFlames" id="sniperD" ng-if="b.stat.goals >= 10 && players.person.primaryPosition.type == 'Defenseman'">
+																	<i class="fa fa-bullseye fa-2x"></i>
 																</td>
-																<td class="inFlames" id="twoWayF" ng-if="b.stat.plusMinus >= -1 && b.stat.pim <= 45 && b.stat.points >= 35 && b.stat.shortHandedTimeOnIcePerGame >= '01:20' || b.stat.plusMinus >= 25">
+																<td class="playmaker inFlames" id="playmakerF" ng-if="b.stat.assists >= 37 && players.person.primaryPosition.type == 'Forward'">
+																	<i class="fa fa-magic fa-2x"></i>
+																</td>
+																<td class="playmaker inFlames" id="playmakerD" ng-if="b.stat.assists >= 27 && players.person.primaryPosition.type == 'Defenseman'">
+																	<i class="fa fa-magic fa-2x"></i>
+																</td>
+																<td class="twoway inFlames" id="twoWayF" ng-if="b.stat.plusMinus >= -1 && b.stat.pim <= 45 && b.stat.points >= 35 && b.stat.shortHandedTimeOnIcePerGame >= '01:20' || b.stat.plusMinus >= 25">
 																	<i class="fa fa-balance-scale fa-2x"></i>
 																</td>
-																<td class="inFlames" id="hitter" ng-if="b.stat.hits >= 130">
+																<td class="hitter inFlames" id="hitter" ng-if="b.stat.hits >= 140">
 																	<i class="fa fa-bomb fa-2x"></i>
 																</td>
-																<td class="inFlames" id="winner" ng-if="b.stat.gameWinningGoals >= 10 || b.stat.overTimeGoals >= 2 || b.stat.shortHandedGoals >= 5">
-																	<i class="fa fa-heart fa-2x"></i>
-																</td>
-																<td class="inFlames" id="defender" ng-if="b.stat.plusMinus >= 0 && players.person.primaryPosition.type == 'Defenseman' && b.stat.blocked >= 100">
+																<td class="def inFlames" id="defender" ng-if="b.stat.plusMinus >= -3 && players.person.primaryPosition.type == 'Defenseman' && b.stat.blocked >= 100">
 																	<i class="fa fa-shield fa-2x"></i>
 																</td>
-																<td class="inFlames" id="hardWorker" ng-if="b.stat.timeOnIcePerGame >= '23:00' && players.person.primaryPosition.type != 'Goalie'">
+																<td class="hardworker inFlames" id="hardWorker" ng-if="b.stat.timeOnIcePerGame >= '23:00' && players.person.primaryPosition.type != 'Goalie'">
 																	<i class="fa fa-plug fa-2x"></i>
 																</td>
-																<td class="inFlames" id="youngStarF" ng-if="players.person.currentAge <= 23 && b.stat.points >= 40 && players.person.primaryPosition.type == 'Forward'">
+																<td class="gem inFlames" id="youngStarF" ng-if="players.person.currentAge <= 23 && b.stat.points >= 40 && players.person.primaryPosition.type == 'Forward'">
 																	<i class="fa fa-diamond fa-2x"></i>
 																</td>
-																<td class="inFlames" id="youngStarG" ng-if="players.person.currentAge <= 23 && b.stat.savePercentage >= 0.93 && players.person.primaryPosition.type == 'Goalie'">
+																<td class="gem inFlames" id="youngStarG" ng-if="players.person.currentAge <= 23 && b.stat.savePercentage >= 0.93 && players.person.primaryPosition.type == 'Goalie'">
 																	<i class="fa fa-diamond fa-2x"></i>
 																</td>
-																<td class="inFlames" id="youngStarD" ng-if="players.person.currentAge <= 23 && b.stat.plusMinus >= -5 && b.stat.points >= 20 && players.person.primaryPosition.type == 'Defenseman'">
+																<td class="gem inFlames" id="youngStarD" ng-if="players.person.currentAge <= 23 && b.stat.plusMinus >= -5 && b.stat.points >= 20 && players.person.primaryPosition.type == 'Defenseman'">
 																	<i class="fa fa-diamond fa-2x"></i>
 																</td>
-																<td class="inFlames" ng-if="b.stat.goalAgainstAverage <= 2.5 && players.person.primaryPosition.type == 'Goalie'">
-																	<i class="fa fa-magnet fa-2x"></i>
+																<td class="magnet inFlames" ng-if="b.stat.shutouts >= 5 && players.person.primaryPosition.type == 'Goalie'">
+																	<i class="fa fa-lock fa-2x"></i>
+																</td>
+																<td class="winner inFlames" id="winner" ng-if="b.stat.gameWinningGoals >= 10 || b.stat.overTimeGoals >= 2 || b.stat.shortHandedGoals >= 5">
+																	<i class="fa fa-heart fa-2x"></i>
+																</td>
+																<td class="penalties inFlames" id="penalties" ng-if="b.stat.pim >= 70">
+																	<i class="fa fa-inbox fa-2x"></i>
 																</td>
 															</tr>
 														</tbody>	
 													</table>
 													<div class="personalInfo col-xl-12">
 														<p class="info">{{ players.person.primaryPosition.type }}  [  {{ players.person.primaryPosition.abbreviation }} ]</p>
-														<p class="info">Jersey number: {{ players.jerseyNumber }}</p>
 														<p class="info">Age: {{ players.person.currentAge }}</p>
 														<p class="info">Nationality: {{ players.person.nationality }}</p>
 														<p class="info">Shoots: {{ players.person.shootsCatches }}</p>
 													</div>
 												</div>
 												<table class="table">
-														<tbody ng-if="players.person.primaryPosition.type != 'Goalie'">
+														<tbody ng-if="players.person.primaryPosition.type == 'Forward' && players.person.primaryPosition.name == 'Center'">
 															<tr>
-																<th>Gms</th>
+																<th>Gm</th>
 																<th>G</th>
 																<th>A</th>
 																<th>P</th>
 																<th>+/-</th>
-																<th>H</th>
-																<th>Pim</th>
+																<th>Hits</th>
+																<th>FO%</th>
+																<th>T/Gm</th>
 															</tr>
 															<tr>
 																<td> {{ b.stat.games }} </td>
@@ -195,9 +216,52 @@
 																<td> {{ b.stat.points }} </td>
 																<td> {{ b.stat.plusMinus }} </td>
 																<td> {{ b.stat.hits }} </td>
-																<td> {{ b.stat.pim }} </td>
+																<td> {{ b.stat.faceOffPct }} </td>
+																<td> {{ b.stat.timeOnIcePerGame }} </td>
 															</tr>
-														</tbody>												
+														</tbody>
+														<tbody ng-if="players.person.primaryPosition.type == 'Forward' && players.person.primaryPosition.name != 'Center'">
+															<tr>
+																<th>Gms</th>
+																<th>G</th>
+																<th>A</th>
+																<th>P</th>
+																<th>+/-</th>
+																<th>Hits</th>
+																<th>T/Gm</th>
+															</tr>
+															<tr>
+																<td> {{ b.stat.games }} </td>
+																<td> {{ b.stat.goals }} </td>
+																<td> {{ b.stat.assists }} </td>
+																<td> {{ b.stat.points }} </td>
+																<td> {{ b.stat.plusMinus }} </td>
+																<td> {{ b.stat.hits }} </td>
+																<td> {{ b.stat.timeOnIcePerGame }} </td>
+															</tr>
+														</tbody>
+														<tbody ng-if="players.person.primaryPosition.type == 'Defenseman'">
+															<tr>
+																<th>Gms</th>
+																<th>G</th>
+																<th>A</th>
+																<th>P</th>
+																<th>+/-</th>
+																<th>BL</th>
+																<th>Hits</th>
+																<th>T/Gm</th>
+															</tr>
+															<tr>
+																<td> {{ b.stat.games }} </td>
+																<td> {{ b.stat.goals }} </td>
+																<td> {{ b.stat.assists }} </td>
+																<td> {{ b.stat.points }} </td>
+																<td> {{ b.stat.plusMinus }} </td>
+																<td> {{ b.stat.blocked }} </td>
+																<td> {{ b.stat.hits }} </td>
+																<td> {{ b.stat.timeOnIcePerGame }} </td>
+															</tr>
+														</tbody>
 														<tbody ng-if="players.person.primaryPosition.type == 'Goalie'">
 															<tr>
 																<th>Gms</th>
@@ -206,6 +270,7 @@
 																<th>OT</th>
 																<th>S%</th>
 																<th>GA/Gm</th>
+																<th>SO</th>
 															</tr>
 															<tr>
 																<td> {{ b.stat.games }} </td>
@@ -214,6 +279,7 @@
 																<td> {{ b.stat.ot }} </td>
 																<td> {{ b.stat.savePercentage * 100 | number : 1}}</td>
 																<td> {{ b.stat.goalAgainstAverage }} </td>
+																<td> {{ b.stat.shutouts }} </td>
 															</tr>
 														</tbody>													
 												</table>
@@ -240,17 +306,21 @@
 									</div>
 									<div class="infobox">
 										<span>Earns spot in the roster = </span>
-										<i class="fa fa-check fa-2x"></i>
+										<i class="fa fa-thumbs-up fa-2x"></i>
+									</div>
+									<div class="infobox">
+										<span>Disappointment = </span>
+										<i class="fa fa-thumbs-down fa-2x"></i>
 									</div>
 						</div >
 						<div class="infoColumn col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
 									<div class="infobox">
 										<span>True Sniper = </span>
-										<i class="fa fa-crosshairs fa-2x"></i>
+										<i class="fa fa-bullseye fa-2x"></i>
 									</div>
 									<div class="infobox">
-										<span>Playmaker With Hands = </span>
-										<i class="fa fa-eye fa-2x"></i>
+										<span>Playmaker With Soft Hands = </span>
+										<i class="fa fa-magic fa-2x"></i>
 									</div>
 									<div class="infobox">
 										<span>Two Way Game = </span>
@@ -261,8 +331,8 @@
 										<i class="fa fa-bomb fa-2x"></i>
 									</div>
 									<div class="infobox">
-										<span>Puck Magnet = </span>
-										<i class="fa fa-magnet fa-2x"></i>
+										<span>Shutout master = </span>
+										<i class="fa fa-lock fa-2x"></i>
 									</div>
 						</div>
 						<div class="infoColumn col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
@@ -271,7 +341,7 @@
 										<i class="fa fa-shield fa-2x"></i>
 									</div>
 									<div class="infobox">
-										<span>Winner And Teams Spirit = </span>
+										<span>Winner and Teams Spirit = </span>
 										<i class="fa fa-heart fa-2x"></i>
 									</div>
 									<div class="infobox">
@@ -281,6 +351,10 @@
 									<div class="infobox">
 										<span>Potential Young Star = </span>
 										<i class="fa fa-diamond fa-2x"></i>
+									</div>
+									<div class="infobox">
+										<span>Lots of Penaltyminutes = </span>
+										<i class="fa fa-inbox fa-2x"></i>
 									</div>
 						</div>
 					</div>
