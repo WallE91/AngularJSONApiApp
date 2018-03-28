@@ -13,8 +13,6 @@
 
 .club.BOS {
   background-color: #FCB514; }
-  .club.BOS .container-fluid {
-    color: #000 !important; }
 
 .club.BUF {
   background-color: #002654; }
@@ -57,8 +55,6 @@
 
 .club.NSH {
   background-color: #FFB81C; }
-  .club.NSH .container-fluid {
-    color: #000 !important; }
 
 .club.NJD {
   background-color: #CE1126; }
@@ -77,8 +73,6 @@
 
 .club.PIT {
   background-color: #FFB81C; }
-  .club.PIT .container-fluid {
-    color: #000 !important; }
 
 .club.STL {
   background-color: #002F87; }
@@ -96,7 +90,7 @@
   background-color: #001F5C; }
 
 .club.VGK {
-  background-color: #B4975A; }
+  background-color: #333F42; }
 
 .club.WSH {
   background-color: #CF0A2C; }
@@ -161,6 +155,8 @@ header {
 
 /*NHL players data*/
 .NHLDataContent {
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: #f3f3f3; }
   .NHLDataContent .container-fluid {
     color: #474747;
@@ -187,23 +183,101 @@ header {
       .NHLDataContent .container-fluid .playerProfile .singlePlayer .table tr th, .NHLDataContent .container-fluid .playerProfile .singlePlayer table tr td {
         background-color: #000;
         color: #D4AF37;
-        border: 1px solid #474747;
-        text-shadow: 0 0 1px #adadad; }
+        border: 1px solid #474747; }
       .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture {
+        position: relative;
         padding-top: 15px; }
       .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture img {
         width: 180px;
         height: 180px; }
-      .NHLDataContent .container-fluid .playerProfile .singlePlayer .jerseyNumber {
-        color: #fff; }
+      .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture .captain {
+        position: absolute;
+        top: 15px;
+        left: 28.3%;
+        padding: 5px;
+        background-color: #000;
+        width: 50px;
+        height: 50px;
+        border-top: 2px solid #fff;
+        border-left: 2px solid #fff;
+        border-radius: 0 0 100% 0; }
+        .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture .captain p {
+          position: absolute;
+          top: 15%;
+          bottom: 85%;
+          right: 80%;
+          left: 20%;
+          font-size: 26px;
+          font-weight: 600; }
+      .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture .jerseyNumber {
+        position: absolute;
+        top: 15px;
+        right: 28.3%;
+        padding: 5px;
+        width: 50px;
+        height: 50px;
+        border-top: 2px solid #fff;
+        border-left: 2px solid #fff;
+        border-radius: 0 0 0 100%; }
+        .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture .jerseyNumber p {
+          position: absolute;
+          top: 15%;
+          bottom: 85%;
+          left: 10px;
+          right: 0;
+          font-size: 26px; }
     .NHLDataContent .container-fluid .filters {
       padding-bottom: 30px; }
       .NHLDataContent .container-fluid .filters .sel {
         border: none;
         box-shadow: 0 0 7px 1px #474747; }
 
+/*Player stats icons colors*/
+.inFlames {
+  font-weight: 600 !important; }
+
+.basic {
+  color: #fff !important; }
+
+.bad {
+  color: #fff !important; }
+
+.star {
+  color: #FAE902 !important; }
+
+.sniper {
+  color: #5DF3E1 !important; }
+
+.playmaker {
+  color: #46F551 !important; }
+
+.twoway {
+  color: #F46E3A !important; }
+
+.hitter {
+  color: #FD2006 !important; }
+
+.def {
+  color: #4A53F9 !important; }
+
+.hardworker {
+  color: #DAA935 !important; }
+
+.winner {
+  color: #FB2631 !important; }
+
+.gem {
+  color: #E23FFC !important; }
+
+.magnet {
+  color: #FC314D !important; }
+
+.penalties {
+  color: #BDFB05 !important; }
+
+/*Players ratings info*/
 .fa {
-  font-size: 24px; }
+  font-size: 26px; }
 
 .playerRatingsInfo {
   padding-top: 15px;
@@ -228,6 +302,7 @@ header {
   .playerRatingsInfo h4 {
     padding-bottom: 15px; }
 
+/*Team stats section*/
 #haku {
   position: relative;
   width: 100%;
