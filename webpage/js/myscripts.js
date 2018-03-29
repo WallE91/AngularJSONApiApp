@@ -6,17 +6,12 @@ app.controller('NHLDataCtrl', function($scope, $http, $filter) {
 		$scope.myPlayersData = response.data.teams; 
 	});
 	
-	$http.get("https://statsapi.web.nhl.com/api/v1/teams/?hydrate=stats").then(function (response) {
-		$scope.myTeamData = response.data.teams; 
-	});
-	
 	$scope.min = 30;
 	
 	// filtering players by properties
 	$scope.positions = ["Center","Left Wing","Right Wing"];
 	$scope.types = ["Forward", "Defenseman", "Goalie"];
 	$scope.countries = ["CAN", "USA", "SWE", "FIN", "RUS", "CZE", "SVK", "FRA", "SUI", "ITA", "DNK"];
-	
 	
     $scope.teamPicker = [
 		{ id: 1, display:"New Jersey Devils", pick:"NJD" },
