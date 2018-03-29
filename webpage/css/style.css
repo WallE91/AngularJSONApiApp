@@ -7,96 +7,158 @@
 
 .club.ANA {
   background-color: #B5985A; }
+  .club.ANA .singlePlayer {
+    border-color: #B5985A !important; }
 
 .club.ARI {
   background-color: #8C2633; }
+  .club.ARI .singlePlayer {
+    border-color: #8C2633 !important; }
 
 .club.BOS {
   background-color: #FCB514; }
+  .club.BOS .singlePlayer {
+    border-color: #FCB514 !important; }
 
 .club.BUF {
   background-color: #002654; }
+  .club.BUF .singlePlayer {
+    border-color: #002654 !important; }
 
 .club.CGY {
   background-color: #B72B35; }
+  .club.CGY .singlePlayer {
+    border-color: #B72B35 !important; }
 
 .club.CAR {
   background-color: #CC0000; }
+  .club.CAR .singlePlayer {
+    border-color: #CC0000 !important; }
 
 .club.CHI {
   background-color: #CF0A2C; }
+  .club.CHI .singlePlayer {
+    border-color: #CF0A2C !important; }
 
 .club.COL {
   background-color: #6F263D; }
+  .club.COL .singlePlayer {
+    border-color: #6F263D !important; }
 
 .club.CBJ {
   background-color: #002654; }
+  .club.CBJ .singlePlayer {
+    border-color: #002654 !important; }
 
 .club.DAL {
   background-color: #006847; }
+  .club.DAL .singlePlayer {
+    border-color: #006847 !important; }
 
 .club.DET {
   background-color: #CE1126; }
+  .club.DET .singlePlayer {
+    border-color: #CE1126 !important; }
 
 .club.EDM {
   background-color: #041E41; }
+  .club.EDM .singlePlayer {
+    border-color: #041E41 !important; }
 
 .club.FLA {
   background-color: #C8102E; }
+  .club.FLA .singlePlayer {
+    border-color: #C8102E !important; }
 
 .club.LAK {
   background-color: #111111; }
+  .club.LAK .singlePlayer {
+    border-color: #111111 !important; }
 
 .club.MIN {
   background-color: #004F30; }
+  .club.MIN .singlePlayer {
+    border-color: #004F30 !important; }
 
 .club.MTL {
   background-color: #AF1E2D; }
+  .club.MTL .singlePlayer {
+    border-color: #AF1E2D !important; }
 
 .club.NSH {
   background-color: #FFB81C; }
+  .club.NSH .singlePlayer {
+    border-color: #FFB81C !important; }
 
 .club.NJD {
   background-color: #CE1126; }
+  .club.NJD .singlePlayer {
+    border-color: #CE1126 !important; }
 
 .club.NYI {
   background-color: #00468B; }
+  .club.NYI .singlePlayer {
+    border-color: #00468B !important; }
 
 .club.NYR {
   background-color: #0038A8; }
+  .club.NYR .singlePlayer {
+    border-color: #0038A8 !important; }
 
 .club.OTT {
   background-color: #E31837; }
+  .club.OTT .singlePlayer {
+    border-color: #E31837 !important; }
 
 .club.PHI {
   background-color: #F74902; }
+  .club.PHI .singlePlayer {
+    border-color: #F74902 !important; }
 
 .club.PIT {
   background-color: #FFB81C; }
+  .club.PIT .singlePlayer {
+    border-color: #FFB81C !important; }
 
 .club.STL {
   background-color: #002F87; }
+  .club.STL .singlePlayer {
+    border-color: #002F87 !important; }
 
 .club.SJS {
   background-color: #006D75; }
+  .club.SJS .singlePlayer {
+    border-color: #006D75 !important; }
 
 .club.TBL {
   background-color: #002868; }
+  .club.TBL .singlePlayer {
+    border-color: #002868 !important; }
 
 .club.TOR {
   background-color: #003E7E; }
+  .club.TOR .singlePlayer {
+    border-color: #003E7E !important; }
 
 .club.VAN {
   background-color: #001F5C; }
+  .club.VAN .singlePlayer {
+    border-color: #001F5C !important; }
 
 .club.VGK {
   background-color: #333F42; }
+  .club.VGK .singlePlayer {
+    border-color: #333F42 !important; }
 
 .club.WSH {
   background-color: #CF0A2C; }
+  .club.WSH .singlePlayer {
+    border-color: #CF0A2C !important; }
 
 .club.WPG {
   background-color: #041E41; }
+  .club.WPG .singlePlayer {
+    border-color: #041E41 !important; }
 
 /*Basic elements*/
 body {
@@ -147,90 +209,116 @@ header {
   header #logoRight {
     right: 20px; }
   header .teamLogo img {
-    width: 150px;
-    height: 150px; }
+    width: 200px;
+    height: 200px; }
 
 #roster h2 {
   padding-top: 30px; }
 
 /*NHL players data*/
 .NHLDataContent {
+  padding-top: 20px;
   padding-left: 10px;
   padding-right: 10px;
   background-color: #f3f3f3; }
   .NHLDataContent .container-fluid {
-    color: #474747;
-    padding-top: 30px; }
+    color: #474747; }
     .NHLDataContent .container-fluid .playerProfile .singlePlayer {
-      color: #fff;
-      background-color: #474747;
-      padding-left: 10px;
-      padding-right: 10px;
-      padding-bottom: 20px;
-      border: 5px solid #f3f3f3; }
-      .NHLDataContent .container-fluid .playerProfile .singlePlayer .beforeStatsTable {
-        padding-top: 10px; }
-        .NHLDataContent .container-fluid .playerProfile .singlePlayer .beforeStatsTable .playerStrengths {
-          margin: 0 auto; }
-          .NHLDataContent .container-fluid .playerProfile .singlePlayer .beforeStatsTable .playerStrengths tr {
-            height: 48px; }
+      color: #000;
+      background-color: #f3f3f3;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-bottom: 30px;
+      border: 10px solid #f3f3f3; }
+      .NHLDataContent .container-fluid .playerProfile .singlePlayer .beforeStatsTable .playerStrengths {
+        margin: 0 auto; }
+        .NHLDataContent .container-fluid .playerProfile .singlePlayer .beforeStatsTable .playerStrengths table tr {
+          height: 48px; }
+          .NHLDataContent .container-fluid .playerProfile .singlePlayer .beforeStatsTable .playerStrengths table tr th .fa, .NHLDataContent .container-fluid .playerProfile .singlePlayer .beforeStatsTable .playerStrengths table tr td .fa {
+            padding: 0; }
+      .NHLDataContent .container-fluid .playerProfile .singlePlayer .beforeStatsTable h3 {
+        padding-bottom: 20px; }
       .NHLDataContent .container-fluid .playerProfile .singlePlayer .personalInfo {
         padding-top: 30px;
         padding-bottom: 30px; }
+      .NHLDataContent .container-fluid .playerProfile .singlePlayer .table {
+        margin: 0 auto; }
       .NHLDataContent .container-fluid .playerProfile .singlePlayer .table tr {
-        width: 100%;
-        font-size: 14px; }
+        width: 100%; }
       .NHLDataContent .container-fluid .playerProfile .singlePlayer .table tr th, .NHLDataContent .container-fluid .playerProfile .singlePlayer table tr td {
         background-color: #000;
         color: #D4AF37;
-        border: 1px solid #474747; }
+        border: 1px solid #474747;
+        margin: 0 auto;
+        font-size: 13px;
+        padding-left: 2px;
+        padding-right: 2px; }
       .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture {
         position: relative;
-        padding-top: 15px; }
-      .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture img {
         width: 180px;
-        height: 180px; }
+        margin: 0 auto; }
+      .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture img {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        box-shadow: 0 0 3px 11px #f3f3f3; }
       .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture .captain {
         position: absolute;
-        top: 15px;
-        left: 28.3%;
-        padding: 5px;
-        background-color: #000;
+        top: 0;
+        left: 0;
         width: 50px;
         height: 50px;
         border-top: 2px solid #fff;
         border-left: 2px solid #fff;
-        border-radius: 0 0 100% 0; }
+        border-radius: 0 0 100% 0;
+        background-color: #000;
+        color: #fff; }
         .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture .captain p {
           position: absolute;
-          top: 15%;
-          bottom: 85%;
-          right: 80%;
-          left: 20%;
-          font-size: 26px;
-          font-weight: 600; }
+          text-align: center;
+          right: 5px;
+          top: 5px;
+          font-size: 24px;
+          font-weight: 600;
+          width: 50px;
+          padding-top: 0px; }
       .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture .jerseyNumber {
         position: absolute;
-        top: 15px;
-        right: 28.3%;
-        padding: 5px;
-        width: 50px;
-        height: 50px;
-        border-top: 2px solid #fff;
-        border-left: 2px solid #fff;
-        border-radius: 0 0 0 100%; }
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
+        width: 180px;
+        height: 36px;
+        text-align: center;
+        border-bottom: 2px solid #fff;
+        border-top: 4px solid #fff;
+        color: #fff; }
         .NHLDataContent .container-fluid .playerProfile .singlePlayer .playerPicture .jerseyNumber p {
           position: absolute;
-          top: 15%;
-          bottom: 85%;
-          left: 10px;
+          text-align: center;
+          left: 0;
           right: 0;
-          font-size: 26px; }
+          bottom: 0;
+          margin: auto;
+          font-size: 24px;
+          font-weight: 600;
+          width: 48px;
+          height: 34px;
+          background-color: #000;
+          border-top: 4px solid #fff;
+          padding-top: 2px; }
     .NHLDataContent .container-fluid .filters {
       padding-bottom: 30px; }
-      .NHLDataContent .container-fluid .filters .sel {
-        border: none;
-        box-shadow: 0 0 7px 1px #474747; }
+
+.sel {
+  border: none;
+  box-shadow: 0 0 7px 1px #474747;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px; }
 
 /*Player stats icons colors*/
 .inFlames {
@@ -277,11 +365,12 @@ header {
 
 /*Players ratings info*/
 .fa {
-  font-size: 26px; }
+  font-size: 22px; }
 
 .playerRatingsInfo {
   padding-top: 15px;
-  padding-bottom: 30px; }
+  padding-bottom: 30px;
+  color: #000; }
   .playerRatingsInfo .infoColumn {
     display: inline-block;
     width: 100%;
@@ -292,9 +381,9 @@ header {
     .playerRatingsInfo .infoColumn .infobox {
       padding-top: 10px;
       padding-bottom: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
       background-color: #fff; }
-      .playerRatingsInfo .infoColumn .infobox .fa {
-        color: #000; }
     .playerRatingsInfo .infoColumn .infobox:first-child {
       padding-top: 30px; }
     .playerRatingsInfo .infoColumn .infobox:last-child {
@@ -302,14 +391,12 @@ header {
   .playerRatingsInfo h4 {
     padding-bottom: 15px; }
 
-/*Team stats section*/
 #haku {
   position: relative;
   width: 100%;
   height: 50px;
   margin: 0 auto;
-  border: none;
-  margin-top: 30px; }
+  border: none; }
 
 #haku #hakukentta {
   width: 300px;
@@ -366,7 +453,23 @@ header {
       left: 0;
       right: 0; }
     header #logoRight {
-      display: none; } }
+      display: none; }
+
+  .NHLDataContent {
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px; }
+    .NHLDataContent .container-fluid {
+      padding-top: 0; }
+      .NHLDataContent .container-fluid .playerProfile .singlePlayer {
+        padding-left: 15px;
+        padding-right: 15px;
+        border: 0px solid #f3f3f3;
+        border-bottom: 30px solid #f3f3f3; }
+
+  h1 {
+    padding-top: 30px; } }
 @media only screen and (max-width: 576.98px) {
   h1 {
     font-size: 32px; }
@@ -381,14 +484,41 @@ header {
     font-size: 18px; }
 
   p {
-    font-size: 16px; } }
+    font-size: 16px; }
+
+  .NHLDataContent {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px; }
+    .NHLDataContent .container-fluid {
+      padding-top: 0; }
+      .NHLDataContent .container-fluid .playerProfile .singlePlayer {
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 0px solid #f3f3f3;
+        border-bottom: 20px solid #f3f3f3; }
+    .NHLDataContent .table {
+      border-bottom: 30px solid #f3f3f3 !important; } }
 @media only screen and (max-width: 480px) {
-  header .NHLDataContent .teamStats .statbox {
-    height: unset;
-    border-left: 15px #fff solid;
-    border-right: 15px #fff solid; }
-  header h1, header h2, header h3, header h4, header p {
-    padding-left: 15px;
-    padding-right: 15px; } }
+  h1, h2, h3, h4, p {
+    padding-left: 5px;
+    padding-right: 5px; }
+
+  .NHLDataContent {
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0; }
+    .NHLDataContent .container-fluid {
+      padding-top: 0; }
+      .NHLDataContent .container-fluid .playerProfile .singlePlayer {
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        border: 10px solid #000; }
+    .NHLDataContent .table tr th, .NHLDataContent table tr td {
+      font-size: 11px; }
+    .NHLDataContent .fa {
+      font-size: 19px; } }
 
 /*# sourceMappingURL=style.css.map */
