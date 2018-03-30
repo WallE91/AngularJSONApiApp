@@ -104,7 +104,11 @@
 																		<i class="fa fa-star fa-2x"></i>
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" id="superStarF" ng-if="b.stat.points >= 60 && b.stat.points <= 79 && players.person.primaryPosition.type == 'Forward'">
+																	<td class="star inFlames" ng-if="b.stat.points >= 60 && b.stat.points <= 79 && b.stat.games >= 62 && players.person.primaryPosition.type == 'Forward'">
+																		<i class="fa fa-star fa-2x"></i>
+																		<i class="fa fa-star fa-2x"></i>
+																	</td>
+																	<td class="star inFlames" ng-if="b.stat.points >= 50 && b.stat.points <= 59 && b.stat.games <= 61 && players.person.primaryPosition.type == 'Forward'">
 																		<i class="fa fa-star fa-2x"></i>
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
@@ -112,13 +116,19 @@
 																		<i class="fa fa-star fa-2x"></i>
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" id="starF" ng-if="b.stat.points >= 40 && b.stat.points <= 59 && players.person.primaryPosition.type == 'Forward'">
+																	<td class="star inFlames" id="starF" ng-if="b.stat.points >= 40 && b.stat.points <= 59 && b.stat.games >= 62 && players.person.primaryPosition.type == 'Forward'">
+																		<i class="fa fa-star fa-2x"></i>
+																	</td>
+																	<td class="star inFlames" id="starF" ng-if="b.stat.points >= 35 && b.stat.points <= 49 && b.stat.games <= 61 && players.person.primaryPosition.type == 'Forward'">
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
 																	<td class="star inFlames" id="starD" ng-if="b.stat.points >= 30 && b.stat.points <= 44 && players.person.primaryPosition.type == 'Defenseman'">
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="basic inFlames" id="basicF" ng-if="b.stat.points <= 39 && players.person.primaryPosition.type == 'Forward'">
+																	<td class="basic inFlames" ng-if="b.stat.points <= 39 && b.stat.games >= 62 && players.person.primaryPosition.type == 'Forward'">
+																		<i class="fa fa-check fa-2x"></i>
+																	</td>
+																	<td class="basic inFlames" ng-if="b.stat.points <= 34 && b.stat.games <= 61 && players.person.primaryPosition.type == 'Forward'">
 																		<i class="fa fa-check fa-2x"></i>
 																	</td>
 																	<td class="basic inFlames" id="basicD" ng-if="b.stat.points <= 29 && b.stat.points >= 0 && players.person.primaryPosition.type == 'Defenseman'">
