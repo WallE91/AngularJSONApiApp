@@ -5,13 +5,17 @@ app.controller('NHLDataCtrl', function($scope, $http, $filter) {
 	$http.get("https://statsapi.web.nhl.com/api/v1/teams/?hydrate=roster(person(stats(splits=statsSingleSeason)))").then(function (response) {
 		$scope.myPlayersData = response.data.teams; 
 	});
+
 	
-	$scope.min = 30;
+	$http.get("https://statsapi.web.nhl.com/api/v1/standings/wildCardWithLeaders/?expand=standings.record").then(function (response) {
+		$scope.myStandingsData = response.data.records; 
+	});
+
 	
 	// filtering players by properties
 	$scope.positions = ["Center","Left Wing","Right Wing"];
 	$scope.types = ["Forward", "Defenseman", "Goalie"];
-	$scope.countries = ["CAN", "USA", "SWE", "FIN", "RUS", "CZE", "SVK", "FRA", "SUI", "ITA", "DNK"];
+	$scope.countries = ["CAN", "USA", "SWE", "FIN", "RUS", "CZE", "SVK", "SVN", "FRA", "SUI", "ITA", "DNK", "DEU", "NOR"];
 	
     $scope.teamPicker = [
 		{ id: 1, display:"New Jersey Devils", pick:"NJD" },
