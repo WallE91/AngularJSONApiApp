@@ -8,6 +8,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link href="css/style.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Exo+2|Play|Titillium+Web:700" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
 	
@@ -19,9 +20,7 @@
 	<section id="header" class="section">
 		<header>
 			<div class="bigHeaderText">
-				<h1>NHL Fanatic App</h1>
-				<select class="sel select" ng-model="teams.abbreviation" ng-options="abbreviation.pick as abbreviation.display for abbreviation in teamPicker | orderBy: 'display'" ng-init="teams.abbreviation ='ANA'">
-				</select>
+				<h1>NHL Fanatics App</h1>
 			</div>
 			<div ng-repeat="club in myPlayersData | filter : teams">
 				<div id="logoLeft" class="teamLogo">
@@ -34,14 +33,18 @@
 		</header>
 	</section>
 
+	<section class="section teamPick">
+		<select class="sel" ng-model="teams.abbreviation" ng-options="abbreviation.pick as abbreviation.display for abbreviation in teamPicker | orderBy: 'display'" ng-init="teams.abbreviation ='ANA'">
+		</select>
+	</section>
 	
 	<!-- TEAM INTRO -->
 	<section class="section">
-		<div id="intro" class="club NHLDataContent" ng-repeat="club in myPlayersData | filter : teams" ng-class="club.abbreviation">
+		<div id="intro" class="club" ng-repeat="club in myPlayersData | filter : teams" ng-class="club.abbreviation">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xl-12">
-						<h1>{{club.name}}</h1>
+						<h2>{{club.name}}</h2>
 					</div>
 				</div>
 			</div>
@@ -50,25 +53,18 @@
 	
 	
 	
-	<!-- TEAM STATS -->
-	<!--<section class="section">
-			<div id="teamStats" class="club NHLDataContent" ng-repeat="club in myTeamData | filter : teams" ng-class="club.abbreviation">
-				<div class="container-fluid" ng-repeat="s in club.teamStats">
-					
-				</div>
-			</div>
-	</section>-->
+	
 	
 	
 	<!-- ROSTER -->
 	<section class="section">
 			<div id="roster" class="club NHLDataContent" ng-repeat="club in myPlayersData | filter : teams" ng-class="club.abbreviation">
 				<div class="container-fluid">
-					<div id="haku">
+					<div class="filters">
+						<div id="haku">
 							<span id="hakuikoni" class="icon"><i class="fa fa-search"></i></span>
 							<input type="search" id="hakukentta" placeholder="Search for player..." ng-model="playerSearch"/>
-					</div><br/>
-					<div class="filters">
+						</div><br/>
 						<select class="sel" ng-model="typeFilter" ng-options="type as type for type in types">
 							<option value="">All Positions</option>
 						</select>
@@ -78,7 +74,8 @@
 						<select class="sel" ng-model="countryFilter" ng-options="nationality as nationality for nationality in countries">
 							<option value="">Nationality</option>
 						</select>
-					</div>																													
+					</div>	
+					<h2>Team Roster</h2>
 					<div class="playerProfile row">
 							<div class="club singlePlayer col-xl-4 col-lg-6 col-md-6 col-sm-12 col-xs-12" ng-repeat="players in club.roster.roster | filter : (!!posFilter || undefined) && posFilter | filter : (!!typeFilter || undefined) && typeFilter | filter : (!!countryFilter || undefined) && countryFilter | filter : playerSearch | orderBy : 'person.lastName'">
 										<div ng-repeat="a in players.person.stats">
@@ -119,7 +116,7 @@
 																	<td class="star inFlames" id="starF" ng-if="b.stat.points >= 40 && b.stat.points <= 59 && b.stat.games >= 62 && players.person.primaryPosition.type == 'Forward'">
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" id="starF" ng-if="b.stat.points >= 35 && b.stat.points <= 49 && b.stat.games <= 61 && players.person.primaryPosition.type == 'Forward'">
+																	<td class="star inFlames" id="starF" ng-if="b.stat.points >= 30 && b.stat.points <= 49 && b.stat.games <= 61 && players.person.primaryPosition.type == 'Forward'">
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
 																	<td class="star inFlames" id="starD" ng-if="b.stat.points >= 30 && b.stat.points <= 44 && players.person.primaryPosition.type == 'Defenseman'">
@@ -128,7 +125,7 @@
 																	<td class="basic inFlames" ng-if="b.stat.points <= 39 && b.stat.games >= 62 && players.person.primaryPosition.type == 'Forward'">
 																		<i class="fa fa-check fa-2x"></i>
 																	</td>
-																	<td class="basic inFlames" ng-if="b.stat.points <= 34 && b.stat.games <= 61 && players.person.primaryPosition.type == 'Forward'">
+																	<td class="basic inFlames" ng-if="b.stat.points <= 29 && b.stat.games <= 61 && players.person.primaryPosition.type == 'Forward'">
 																		<i class="fa fa-check fa-2x"></i>
 																	</td>
 																	<td class="basic inFlames" id="basicD" ng-if="b.stat.points <= 29 && b.stat.points >= 0 && players.person.primaryPosition.type == 'Defenseman'">
@@ -202,13 +199,14 @@
 															</tbody>	
 														</table>
 														<div class="personalInfo col-xl-12">
-															<p class="info">{{ players.person.primaryPosition.type }}  [  {{ players.person.primaryPosition.abbreviation }} ]</p>
-															<p class="info">Age: {{ players.person.currentAge }}</p>
-															<p class="info">Nationality: {{ players.person.nationality }}</p>
-															<p class="info">Shoots: {{ players.person.shootsCatches }}</p>
+															<p class="info"><span>{{ players.person.primaryPosition.type }}</span><span ng-if="players.person.primaryPosition.type == 'Forward'"> | </span><span ng-if="players.person.primaryPosition.type == 'Forward'">{{ players.person.primaryPosition.abbreviation }}</span></p>
+															<p class="info"><span>Age</span><span> | </span><span>{{ players.person.currentAge }}</span></p>
+															<p class="info"><span>Nationality</span><span> | </span><span>{{ players.person.nationality }}</span></p>
+															<p class="info"><span>Size</span><span> | </span><span>{{ players.person.height }}</span><span> | </span><span>{{ players.person.weight }} lb</span></p>
+															<p class="info"><span>Shoots</span><span> | </span><span>{{ players.person.shootsCatches }}</span></p>
 														</div>
 													</div>
-												<table class="table">
+													<table class="table-stats table">
 														<tbody ng-if="players.person.primaryPosition.type == 'Forward' && players.person.primaryPosition.name == 'Center'">
 															<tr>
 																<th>Gm</th>
@@ -293,79 +291,283 @@
 																<td> {{ b.stat.shutouts }} </td>
 															</tr>
 														</tbody>													
-												</table>
+													</table>
 											</div>
 										</div>	
 							</div>
 					</div>
+				</div>
+			</div>
+	</section>
+	
+	
+	<!-- PLAYERS RATINGS ICONS INFO -->
+	<section class="section">
+				<div class="container-fluid">
 					<div class="row playerRatingsInfo">
-						<div class="infoColumn col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
-									<div class="infobox">
-										<span>Elite Superstar = </span>
-										<i class="fa fa-star fa-2x"></i>
-										<i class="fa fa-star fa-2x"></i>
-										<i class="fa fa-star fa-2x"></i>
+								<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+									<div class="club infoColumn" ng-class="club.abbreviation">
+											<div class="infobox">
+												<span>Elite Superstar</span><span> = </span>
+												<i class="fa fa-star fa-2x"></i>
+												<i class="fa fa-star fa-2x"></i>
+												<i class="fa fa-star fa-2x"></i>
+											</div>
+											<div class="infobox">
+												<span>Superstar</span><span> = </span>
+												<i class="fa fa-star fa-2x"></i>
+												<i class="fa fa-star fa-2x"></i>
+											</div>
+											<div class="infobox">
+												<span>Star</span><span> = </span>
+												<i class="fa fa-star fa-2x"></i>
+											</div>
+											<div class="infobox">
+												<span>Earns spot in the roster</span><span> = </span>
+												<i class="fa fa-check fa-2x"></i>
+											</div>
+											<div class="infobox">
+												<span>( Based on point production )</span>
+											</div>
 									</div>
-									<div class="infobox">
-										<span>Superstar = </span>
-										<i class="fa fa-star fa-2x"></i>
-										<i class="fa fa-star fa-2x"></i>
+								</div >
+								<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+									<div class="infoColumn">
+											<div class="infobox">
+												<span>True Sniper</span><span> = </span>
+												<i class="fa fa-bullseye fa-2x"></i>
+											</div>
+											<div class="infobox">
+												<span>Playmaker With Hands</span><span> = </span>
+												<i class="fa fa-magic fa-2x"></i>
+											</div>
+											<div class="infobox">
+												<span>Two Way Game</span><span> = </span>
+												<i class="fa fa-balance-scale fa-2x"></i>
+											</div>
+											<div class="infobox">
+												<span>Hard Hitter</span><span> = </span>
+												<i class="fa fa-bomb fa-2x"></i>
+											</div>
+											<div class="infobox">
+												<span>Shutout master</span><span> = </span>
+												<i class="fa fa-lock fa-2x"></i>
+											</div>
 									</div>
-									<div class="infobox">
-										<span>Star = </span>
-										<i class="fa fa-star fa-2x"></i>
+								</div>
+								<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+									<div class="infoColumn">
+											<div class="infobox">
+												<span>Great Defense</span><span> = </span>
+												<i class="fa fa-shield fa-2x"></i>
+											</div>
+											<div class="infobox">
+												<span>Winner and Teams Spirit</span><span> = </span>
+												<i class="fa fa-heart fa-2x"></i>
+											</div>
+											<div class="infobox">
+												<span>Plays High Minutes</span><span> = </span>
+												<i class="fa fa-plug fa-2x"></i>
+											</div>
+											<div class="infobox">
+												<span>Potential Young Star</span><span> = </span>
+												<i class="fa fa-diamond fa-2x"></i>
+											</div>
+											<div class="infobox">
+												<span>Lots of Penaltyminutes</span><span> = </span>
+												<i class="fa fa-inbox fa-2x"></i>
+											</div>
 									</div>
-									<div class="infobox">
-										<span>Earns spot in the roster = </span>
-										<i class="fa fa-check fa-2x"></i>
-									</div>
-						</div >
-						<div class="infoColumn col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
-									<div class="infobox">
-										<span>True Sniper = </span>
-										<i class="fa fa-bullseye fa-2x"></i>
-									</div>
-									<div class="infobox">
-										<span>Playmaker With Soft Hands = </span>
-										<i class="fa fa-magic fa-2x"></i>
-									</div>
-									<div class="infobox">
-										<span>Two Way Game = </span>
-										<i class="fa fa-balance-scale fa-2x"></i>
-									</div>
-									<div class="infobox">
-										<span>Hard Hitter = </span>
-										<i class="fa fa-bomb fa-2x"></i>
-									</div>
-									<div class="infobox">
-										<span>Shutout master = </span>
-										<i class="fa fa-lock fa-2x"></i>
-									</div>
-						</div>
-						<div class="infoColumn col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12">
-									<div class="infobox">
-										<span>Great Defense = </span>
-										<i class="fa fa-shield fa-2x"></i>
-									</div>
-									<div class="infobox">
-										<span>Winner and Teams Spirit = </span>
-										<i class="fa fa-heart fa-2x"></i>
-									</div>
-									<div class="infobox">
-										<span>Plays High Minutes = </span>
-										<i class="fa fa-plug fa-2x"></i>
-									</div>
-									<div class="infobox">
-										<span>Potential Young Star = </span>
-										<i class="fa fa-diamond fa-2x"></i>
-									</div>
-									<div class="infobox">
-										<span>Lots of Penaltyminutes = </span>
-										<i class="fa fa-inbox fa-2x"></i>
-									</div>
-						</div>
+								</div>
 					</div>
 				</div>
+	</section>
+	
+	
+	
+	
+	<!-- STANDINGS -->
+	<section class="section">
+			<div id="standings" class="standings">
+					<h2>Standings</h2>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xl-12">
+									<h3>Eastern Conference</h3><br/>
+									<table id="metropolitan" class="table">
+										<thead>
+											<tr>
+													<th><b>Metro</b></th>
+													<th><b>GP</b></th>
+													<th><b>W</b></th>
+													<th><b>L</b></th>
+													<th><b>OT</b></th>
+													<th><b>PTS</b></th>
+													<th><b>Diff</b></th>
+													<th class="home"><i class="fa fa-home fa-1x"></i></th>
+													<th class="away"><i class="fa fa-plane fa-1x"></i></th>
+											</tr>
+										</thead>
+										<tbody data-ng-repeat="club in myStandingsData" ng-if="club.conference.name == 'Eastern' && club.standingsType == 'divisionLeaders' && club.division.name == 'Metropolitan'">
+											<tr data-ng-repeat="r in club.teamRecords">
+													<td><span><img src="https://www-league.nhlstatic.com/builds/site-core/86d4b76cc03a4d111ee0e20f9f62eb054eef3b74_1502985652/images/logos/team/current/team-{{r.team.id}}-dark.svg" style="width:36px;height:36px"/></span></td>
+													<td>{{r.gamesPlayed}}</td>
+													<td>{{r.leagueRecord.wins}}</td>
+													<td>{{r.leagueRecord.losses}}</td>
+													<td>{{r.leagueRecord.ot}}</td>
+													<td>{{r.points}}</td>
+													<td><span style="padding:0" ng-if="r.goalsScored - r.goalsAgainst > 0">+</span>{{r.goalsScored - r.goalsAgainst}}</td>
+													<td class="home" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'home'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+													<td class="away" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'away'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+											</tr>
+										</tbody>	
+									</table><br/>
+									<table id="atlantic" class="table">
+										<thead>
+											<tr>
+													<th><b>Atlantic</b></th>
+													<th><b>GP</b></th>
+													<th><b>W</b></th>
+													<th><b>L</b></th>
+													<th><b>OT</b></th>
+													<th><b>PTS</b></th>
+													<th><b>Diff</b></th>
+													<th class="home"><i class="fa fa-home fa-1x"></i></th>
+													<th class="away"><i class="fa fa-plane fa-1x"></i></th>
+											</tr>
+										</thead>
+										<tbody data-ng-repeat="club in myStandingsData" ng-if="club.conference.name == 'Eastern' && club.standingsType == 'divisionLeaders' && club.division.name == 'Atlantic'">
+											<tr data-ng-repeat="r in club.teamRecords">
+													<td><span><img src="https://www-league.nhlstatic.com/builds/site-core/86d4b76cc03a4d111ee0e20f9f62eb054eef3b74_1502985652/images/logos/team/current/team-{{r.team.id}}-dark.svg" style="width:36px;height:36px"/></span></td>
+													<td>{{r.gamesPlayed}}</td>
+													<td>{{r.leagueRecord.wins}}</td>
+													<td>{{r.leagueRecord.losses}}</td>
+													<td>{{r.leagueRecord.ot}}</td>
+													<td>{{r.points}}</td>
+													<td><span style="padding:0" ng-if="r.goalsScored - r.goalsAgainst > 0">+</span>{{r.goalsScored - r.goalsAgainst}}</td>
+													<td class="home" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'home'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+													<td class="away" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'away'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+											</tr>
+										</tbody>	
+									</table>
+									<table class="table">
+										<thead>
+											<tr>
+													<th><b>Wild card</b></th>
+													<th><b>GP</b></th>
+													<th><b>W</b></th>
+													<th><b>L</b></th>
+													<th><b>OT</b></th>
+													<th><b>PTS</b></th>
+													<th><b>Diff</b></th>
+													<th class="home"><i class="fa fa-home fa-1x"></i></th>
+													<th class="away"><i class="fa fa-plane fa-1x"></i></th>
+											</tr>
+										</thead>
+										<tbody data-ng-repeat="club in myStandingsData" ng-if="club.conference.name == 'Eastern' && club.standingsType == 'wildCard'">
+											<tr data-ng-repeat="r in club.teamRecords" ng-class="{new: r.wildCardRank == '2'}">
+													<td><span><img src="https://www-league.nhlstatic.com/builds/site-core/86d4b76cc03a4d111ee0e20f9f62eb054eef3b74_1502985652/images/logos/team/current/team-{{r.team.id}}-dark.svg" style="width:36px;height:36px"></span></td>
+													<td>{{r.gamesPlayed}}</td>
+													<td>{{r.leagueRecord.wins}}</td>
+													<td>{{r.leagueRecord.losses}}</td>
+													<td>{{r.leagueRecord.ot}}</td>
+													<td>{{r.points}}</td>
+													<td><span style="padding:0" ng-if="r.goalsScored - r.goalsAgainst > 0">+</span>{{r.goalsScored - r.goalsAgainst}}</td>
+													<td class="home" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'home'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+													<td class="away" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'away'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+											</tr>
+										</tbody>
+									</table>
+							</div>
+							<div class="col-xl-12">
+									<h3>Western Conference</h3><br/>
+									<table id="central" class="table">
+										<thead>
+											<tr>
+													<th><b>Central</b></th>
+													<th><b>GP</b></th>
+													<th><b>W</b></th>
+													<th><b>L</b></th>
+													<th><b>OT</b></th>
+													<th><b>PTS</b></th>
+													<th><b>Diff</b></th>
+													<th class="home"><i class="fa fa-home fa-1x"></i></th>
+													<th class="away"><i class="fa fa-plane fa-1x"></i></th>
+											</tr>
+										</thead>
+										<tbody data-ng-repeat="club in myStandingsData" ng-if="club.conference.name == 'Western' && club.standingsType == 'divisionLeaders' && club.division.name == 'Central'">
+											<tr data-ng-repeat="r in club.teamRecords">
+													<td><span><img src="https://www-league.nhlstatic.com/builds/site-core/86d4b76cc03a4d111ee0e20f9f62eb054eef3b74_1502985652/images/logos/team/current/team-{{r.team.id}}-dark.svg" style="width:36px;height:36px"/></span></td>
+													<td>{{r.gamesPlayed}}</td>
+													<td>{{r.leagueRecord.wins}}</td>
+													<td>{{r.leagueRecord.losses}}</td>
+													<td>{{r.leagueRecord.ot}}</td>
+													<td>{{r.points}}</td>
+													<td><span style="padding:0" ng-if="r.goalsScored - r.goalsAgainst > 0">+</span>{{r.goalsScored - r.goalsAgainst}}</td>
+													<td class="home" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'home'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+													<td class="away" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'away'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+											</tr>
+										</tbody>	
+									</table><br/>
+									<table id="pacific" class="table">
+										<thead>
+											<tr>
+													<th><b>Pacific</b></th>
+													<th><b>GP</b></th>
+													<th><b>W</b></th>
+													<th><b>L</b></th>
+													<th><b>OT</b></th>
+													<th><b>PTS</b></th>
+													<th><b>Diff</b></th>
+													<th class="home"><i class="fa fa-home fa-1x"></i></th>
+													<th class="away"><i class="fa fa-plane fa-1x"></i></th>
+											</tr>
+										</thead>
+										<tbody data-ng-repeat="club in myStandingsData" ng-if="club.conference.name == 'Western' && club.standingsType == 'divisionLeaders' && club.division.name == 'Pacific'">
+											<tr data-ng-repeat="r in club.teamRecords">
+													<td><span><img src="https://www-league.nhlstatic.com/builds/site-core/86d4b76cc03a4d111ee0e20f9f62eb054eef3b74_1502985652/images/logos/team/current/team-{{r.team.id}}-dark.svg" style="width:36px;height:36px"></span></td>
+													<td>{{r.gamesPlayed}}</td>
+													<td>{{r.leagueRecord.wins}}</td>
+													<td>{{r.leagueRecord.losses}}</td>
+													<td>{{r.leagueRecord.ot}}</td>
+													<td>{{r.points}}</td>
+													<td><span style="padding:0" ng-if="r.goalsScored - r.goalsAgainst > 0">+</span>{{r.goalsScored - r.goalsAgainst}}</td>
+													<td class="home" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'home'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+													<td class="away"data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'away'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+											</tr>
+										</tbody>	
+									</table>
+									<table class="table">
+										<thead>
+											<tr>
+													<th><b>Wild card</b></th>
+													<th><b>GP</b></th>
+													<th><b>W</b></th>
+													<th><b>L</b></th>
+													<th><b>OT</b></th>
+													<th><b>PTS</b></th>
+													<th><b>Diff</b></th>
+													<th class="home"><i class="fa fa-home fa-1x"></i></th>
+													<th class="away"><i class="fa fa-plane fa-1x"></i></th>
+											</tr>
+										</thead>
+										<tbody data-ng-repeat="club in myStandingsData" ng-if="club.conference.name == 'Western' && club.standingsType == 'wildCard'">
+											<tr data-ng-repeat="r in club.teamRecords" ng-class="{new: r.wildCardRank == '2'}">
+													<td><span><img src="https://www-league.nhlstatic.com/builds/site-core/86d4b76cc03a4d111ee0e20f9f62eb054eef3b74_1502985652/images/logos/team/current/team-{{r.team.id}}-dark.svg" style="width:36px;height:36px;padding-right:5px"></span></td>
+													<td>{{r.gamesPlayed}}</td>
+													<td>{{r.leagueRecord.wins}}</td>
+													<td>{{r.leagueRecord.losses}}</td>
+													<td>{{r.leagueRecord.ot}}</td>
+													<td>{{r.points}}</td>
+													<td><span style="padding:0" ng-if="r.goalsScored - r.goalsAgainst > 0">+</span>{{r.goalsScored - r.goalsAgainst}}</td>
+													<td class="home" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'home'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+													<td class="away" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'away'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+											</tr>
+										</tbody>
+									</table>
+							</div>
+						</div>
+					</div>
 			</div>
 	</section>
 	
