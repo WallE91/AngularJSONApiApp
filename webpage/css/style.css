@@ -200,6 +200,9 @@ span {
   padding-left: 5px;
   padding-right: 5px; }
 
+tr {
+  vertical-align: middle; }
+
 th, td {
   font-family: "Play", sans-serif;
   font-weight: 400; }
@@ -236,20 +239,34 @@ header {
   padding-top: 30px;
   padding-bottom: 80px; }
   .standings table {
-    border: 1px solid #adadad; }
+    border: 1px solid #adadad;
+    margin: auto;
+    border-collapse: collapse;
+    overflow-x: auto;
+    display: block;
+    width: fit-content;
+    max-width: 100%; }
     .standings table tr th, .standings table tr td {
       text-align: center;
-      border: 1px solid #f3f3f3; }
+      border: 1px solid #f3f3f3;
+      padding-left: 10px;
+      padding-right: 10px; }
+    .standings table tr td {
+      white-space: nowrap; }
     .standings table tr th {
       padding-bottom: 10px;
       padding-top: 0; }
+    .standings table tr .largeScreen {
+      display: table-cell; }
+    .standings table tr .smallScreen {
+      display: none; }
     .standings table tr th .fa {
       padding-bottom: 0;
       padding-top: 13px; }
     .standings table tr th:first-child {
-      width: 120px; }
+      min-width: 120px; }
     .standings table tr td:first-child {
-      width: 120px;
+      min-width: 120px;
       padding: 5px;
       background-color: #f3f3f3;
       border: 1px solid #fff; }
@@ -268,10 +285,14 @@ header {
   .standings thead {
     background-color: #000;
     color: #fff; }
+  .standings h3 {
+    padding-top: 30px; }
   .standings .new {
     border-bottom: 3px solid #000; }
   .standings .western {
-    color: red; }
+    order: 1; }
+  .standings .eastern {
+    order: 2; }
 
 /*NHL players data*/
 .NHLDataContent {
@@ -288,8 +309,7 @@ header {
         padding-left: 15px;
         padding-right: 15px;
         padding-bottom: 30px;
-        border: 10px solid #f3f3f3;
-        margin: 0 auto; }
+        border: 10px solid #f3f3f3; }
         .NHLDataContent .container-fluid .playerProfile .singlePlayer .beforeStatsTable .playerStrengths {
           margin: 0 auto; }
           .NHLDataContent .container-fluid .playerProfile .singlePlayer .beforeStatsTable .playerStrengths table tr {
@@ -421,9 +441,9 @@ header {
   font-size: 22px; }
 
 .playerRatingsInfo {
-  background-color: #f3f3f3;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  background-color: #474747;
+  padding-top: 50px;
+  padding-bottom: 50px;
   padding-left: 20px;
   padding-right: 20px; }
   .playerRatingsInfo .infoColumn {
@@ -433,8 +453,8 @@ header {
     padding-bottom: 20px;
     padding-left: 0;
     padding-right: 0;
-    background-color: #474747;
-    color: #fff;
+    background-color: #f3f3f3;
+    color: #474747;
     margin-bottom: 20px; }
     .playerRatingsInfo .infoColumn .infobox {
       padding-top: 10px;
@@ -503,6 +523,12 @@ header {
   background-color: #000;
   padding-bottom: 20px; }
 
+/*MEDIA QUERIES*/
+@media only screen and (max-width: 1200px) {
+  .standings .western {
+    order: 2; }
+  .standings .eastern {
+    order: 1; } }
 @media only screen and (max-width: 767.98px) {
   header {
     padding-top: 0;
@@ -552,25 +578,24 @@ header {
         padding-left: 5px;
         padding-right: 5px; }
 
-  .standings .home, .standings .away {
+  .standings table tr th, .standings table tr td {
+    text-align: center;
+    border: 1px solid #f3f3f3;
+    padding-left: 10px;
+    padding-right: 10px; }
+  .standings table tr th:first-child {
+    padding-left: 5px;
+    padding-right: 5px;
+    min-width: 64px; }
+  .standings table tr td:first-child {
+    padding: 5px;
+    background-color: #f3f3f3;
+    border: 1px solid #fff;
+    min-width: 64px; }
+  .standings table tr .largeScreen {
     display: none; }
-  .standings table {
-    border: 1px solid #adadad; }
-    .standings table tr th, .standings table tr td {
-      text-align: center;
-      border: 1px solid #f3f3f3;
-      padding-left: 3px;
-      padding-right: 3px; }
-    .standings table tr th {
-      padding-bottom: 10px;
-      padding-top: 10px; }
-    .standings table tr th:first-child {
-      width: 100px; }
-    .standings table tr td:first-child {
-      width: 100px;
-      padding: 5px;
-      background-color: #f3f3f3;
-      border: 1px solid #fff; } }
+  .standings table tr .smallScreen {
+    display: table-cell; } }
 @media only screen and (max-width: 576.98px) {
   h1 {
     font-size: 40px; }
