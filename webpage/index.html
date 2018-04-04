@@ -392,20 +392,21 @@
 					<h2>Standings</h2>
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-xl-12">
+							<div class="eastern col-xl-6 col-lg-12">
 									<h3>Eastern Conference</h3><br/>
 									<table id="metropolitan" class="table">
 										<thead>
 											<tr>
-													<th><b>Metro</b></th>
+													<th class="largeScreen"><b>Metropolitan</b></th><th class="smallScreen"><b>MET</b></th>
 													<th><b>GP</b></th>
 													<th><b>W</b></th>
 													<th><b>L</b></th>
 													<th><b>OT</b></th>
 													<th><b>PTS</b></th>
-													<th><b>Diff</b></th>
+													<th><b>DIFF</b></th>
 													<th class="home"><i class="fa fa-home fa-1x"></i></th>
 													<th class="away"><i class="fa fa-plane fa-1x"></i></th>
+													<th><b>STRK</b></th>
 											</tr>
 										</thead>
 										<tbody data-ng-repeat="club in myStandingsData" ng-if="club.conference.name == 'Eastern' && club.standingsType == 'divisionLeaders' && club.division.name == 'Metropolitan'">
@@ -419,13 +420,14 @@
 													<td><span style="padding:0" ng-if="r.goalsScored - r.goalsAgainst > 0">+</span>{{r.goalsScored - r.goalsAgainst}}</td>
 													<td class="home" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'home'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
 													<td class="away" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'away'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+													<td>{{r.streak.streakCode}}</td>
 											</tr>
 										</tbody>	
 									</table><br/>
 									<table id="atlantic" class="table">
 										<thead>
 											<tr>
-													<th><b>Atlantic</b></th>
+													<th class="largeScreen"><b>Atlantic</b></th><th class="smallScreen"><b>ATL</b></th>
 													<th><b>GP</b></th>
 													<th><b>W</b></th>
 													<th><b>L</b></th>
@@ -434,6 +436,7 @@
 													<th><b>Diff</b></th>
 													<th class="home"><i class="fa fa-home fa-1x"></i></th>
 													<th class="away"><i class="fa fa-plane fa-1x"></i></th>
+													<th><b>STRK</b></th>
 											</tr>
 										</thead>
 										<tbody data-ng-repeat="club in myStandingsData" ng-if="club.conference.name == 'Eastern' && club.standingsType == 'divisionLeaders' && club.division.name == 'Atlantic'">
@@ -447,13 +450,14 @@
 													<td><span style="padding:0" ng-if="r.goalsScored - r.goalsAgainst > 0">+</span>{{r.goalsScored - r.goalsAgainst}}</td>
 													<td class="home" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'home'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
 													<td class="away" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'away'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+													<td>{{r.streak.streakCode}}</td>
 											</tr>
 										</tbody>	
 									</table>
 									<table class="table">
 										<thead>
 											<tr>
-													<th><b>Wild card</b></th>
+													<th class="largeScreen"><b>Wild card</b></th><th class="smallScreen"><b>WC</b></th>
 													<th><b>GP</b></th>
 													<th><b>W</b></th>
 													<th><b>L</b></th>
@@ -462,6 +466,7 @@
 													<th><b>Diff</b></th>
 													<th class="home"><i class="fa fa-home fa-1x"></i></th>
 													<th class="away"><i class="fa fa-plane fa-1x"></i></th>
+													<th><b>STRK</b></th>
 											</tr>
 										</thead>
 										<tbody data-ng-repeat="club in myStandingsData" ng-if="club.conference.name == 'Eastern' && club.standingsType == 'wildCard'">
@@ -475,16 +480,17 @@
 													<td><span style="padding:0" ng-if="r.goalsScored - r.goalsAgainst > 0">+</span>{{r.goalsScored - r.goalsAgainst}}</td>
 													<td class="home" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'home'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
 													<td class="away" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'away'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+													<td>{{r.streak.streakCode}}</td>
 											</tr>
 										</tbody>
 									</table>
 							</div>
-							<div class="col-xl-12">
+							<div class="western col-xl-6 col-lg-12">
 									<h3>Western Conference</h3><br/>
 									<table id="central" class="table">
 										<thead>
 											<tr>
-													<th><b>Central</b></th>
+													<th class="largeScreen"><b>Central</b></th><th class="smallScreen"><b>CTL</b></th>
 													<th><b>GP</b></th>
 													<th><b>W</b></th>
 													<th><b>L</b></th>
@@ -493,6 +499,7 @@
 													<th><b>Diff</b></th>
 													<th class="home"><i class="fa fa-home fa-1x"></i></th>
 													<th class="away"><i class="fa fa-plane fa-1x"></i></th>
+													<th><b>STRK</b></th>
 											</tr>
 										</thead>
 										<tbody data-ng-repeat="club in myStandingsData" ng-if="club.conference.name == 'Western' && club.standingsType == 'divisionLeaders' && club.division.name == 'Central'">
@@ -506,13 +513,14 @@
 													<td><span style="padding:0" ng-if="r.goalsScored - r.goalsAgainst > 0">+</span>{{r.goalsScored - r.goalsAgainst}}</td>
 													<td class="home" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'home'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
 													<td class="away" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'away'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+													<td>{{r.streak.streakCode}}</td>
 											</tr>
 										</tbody>	
 									</table><br/>
 									<table id="pacific" class="table">
 										<thead>
 											<tr>
-													<th><b>Pacific</b></th>
+													<th class="largeScreen"><b>Pacific</b></th><th class="smallScreen"><b>PAC</b></th>
 													<th><b>GP</b></th>
 													<th><b>W</b></th>
 													<th><b>L</b></th>
@@ -521,6 +529,7 @@
 													<th><b>Diff</b></th>
 													<th class="home"><i class="fa fa-home fa-1x"></i></th>
 													<th class="away"><i class="fa fa-plane fa-1x"></i></th>
+													<th><b>STRK</b></th>
 											</tr>
 										</thead>
 										<tbody data-ng-repeat="club in myStandingsData" ng-if="club.conference.name == 'Western' && club.standingsType == 'divisionLeaders' && club.division.name == 'Pacific'">
@@ -534,13 +543,14 @@
 													<td><span style="padding:0" ng-if="r.goalsScored - r.goalsAgainst > 0">+</span>{{r.goalsScored - r.goalsAgainst}}</td>
 													<td class="home" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'home'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
 													<td class="away"data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'away'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+													<td>{{r.streak.streakCode}}</td>
 											</tr>
 										</tbody>	
 									</table>
 									<table class="table">
 										<thead>
 											<tr>
-													<th><b>Wild card</b></th>
+													<th class="largeScreen"><b>Wild card</b></th><th class="smallScreen"><b>WC</b></th>
 													<th><b>GP</b></th>
 													<th><b>W</b></th>
 													<th><b>L</b></th>
@@ -549,6 +559,7 @@
 													<th><b>Diff</b></th>
 													<th class="home"><i class="fa fa-home fa-1x"></i></th>
 													<th class="away"><i class="fa fa-plane fa-1x"></i></th>
+													<th><b>STRK</b></th>
 											</tr>
 										</thead>
 										<tbody data-ng-repeat="club in myStandingsData" ng-if="club.conference.name == 'Western' && club.standingsType == 'wildCard'">
@@ -562,6 +573,7 @@
 													<td><span style="padding:0" ng-if="r.goalsScored - r.goalsAgainst > 0">+</span>{{r.goalsScored - r.goalsAgainst}}</td>
 													<td class="home" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'home'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
 													<td class="away" data-ng-repeat="or in r.records.overallRecords" ng-if="or.type == 'away'"><span>{{or.wins}}</span><span> - </span><span>{{or.losses}}</span><span> - </span><span>{{or.ot}}</span></td>
+													<td>{{r.streak.streakCode}}</td>
 											</tr>
 										</tbody>
 									</table>
