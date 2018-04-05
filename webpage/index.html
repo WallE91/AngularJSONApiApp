@@ -9,13 +9,15 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link href="css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Exo+2|Play|Titillium+Web:700" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/circliful/1.0.4/css/jquery.circliful.min.css" rel="stylesheet" type="text/css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
 	
 <body ng-app="myApp" ng-controller="NHLDataCtrl">
 	
 	
-
+	
+	
 	<!-- HEADER -->
 	<section id="header" class="section">
 		<header>
@@ -39,7 +41,7 @@
 	</section>
 	
 	<!-- TEAM INTRO -->
-	<section class="section">
+	<section id="team-intro" class="section">
 		<div id="intro" class="club" ng-repeat="club in myPlayersData | filter : teams" ng-class="club.abbreviation">
 			<div class="container-fluid">
 				<div class="row">
@@ -57,7 +59,7 @@
 	
 	
 	<!-- ROSTER -->
-	<section class="section">
+	<section id="roster" class="section">
 			<div id="roster" class="club NHLDataContent" ng-repeat="club in myPlayersData | filter : teams" ng-class="club.abbreviation">
 				<div class="container-fluid">
 					<div class="filters">
@@ -91,44 +93,40 @@
 														<table class="table playerStrengths">
 															<tbody>
 																<tr>
-																	<td class="star inFlames" id="eliteSuperStarF" ng-if="b.stat.points >= 80 && players.person.primaryPosition.type == 'Forward'">
+																	<td class="star inFlames" id="eliteSuperStarF" ng-if="b.stat.points / b.stat.games >= 0.95 && b.stat.games >= 40 && players.person.primaryPosition.type == 'Forward'">
 																		<i class="fa fa-star fa-2x"></i>
 																		<i class="fa fa-star fa-2x"></i>
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" id="eliteSuperStarD" ng-if="b.stat.points >= 60 && players.person.primaryPosition.type == 'Defenseman'">
+																	<td class="star inFlames" id="eliteSuperStarD" ng-if="b.stat.points / b.stat.games >= 0.75 && b.stat.games >= 40 && players.person.primaryPosition.type == 'Defenseman'">
 																		<i class="fa fa-star fa-2x"></i>
 																		<i class="fa fa-star fa-2x"></i>
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" ng-if="b.stat.points >= 60 && b.stat.points <= 79 && b.stat.games >= 62 && players.person.primaryPosition.type == 'Forward'">
+																	<td class="star inFlames" id="SuperStarF" ng-if="b.stat.points / b.stat.games >= 0.75 && b.stat.points / b.stat.games < 0.95 && b.stat.games >= 40 && players.person.primaryPosition.type == 'Forward'">
 																		<i class="fa fa-star fa-2x"></i>
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" ng-if="b.stat.points >= 50 && b.stat.points <= 59 && b.stat.games <= 61 && players.person.primaryPosition.type == 'Forward'">
+																	<td class="star inFlames" id="SuperStarD" ng-if="b.stat.points / b.stat.games >= 0.50 && b.stat.points / b.stat.games < 0.95 && b.stat.games >= 40 && players.person.primaryPosition.type == 'Defenseman'">
 																		<i class="fa fa-star fa-2x"></i>
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" id="superStarD" ng-if="b.stat.points >= 45 && b.stat.points <= 59 && players.person.primaryPosition.type == 'Defenseman'">
-																		<i class="fa fa-star fa-2x"></i>
-																		<i class="fa fa-star fa-2x"></i>
-																	</td>
-																	<td class="star inFlames" id="starF" ng-if="b.stat.points >= 40 && b.stat.points <= 59 && b.stat.games >= 62 && players.person.primaryPosition.type == 'Forward'">
+																	<td class="star inFlames" ng-if="b.stat.points / b.stat.games >= 0.50 && b.stat.points / b.stat.games < 0.75 && b.stat.games >= 40 && players.person.primaryPosition.type == 'Forward'">
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" id="starF" ng-if="b.stat.points >= 30 && b.stat.points <= 49 && b.stat.games <= 61 && players.person.primaryPosition.type == 'Forward'">
+																	<td class="star inFlames" ng-if="b.stat.points / b.stat.games >= 0.30 && b.stat.points / b.stat.games < 0.5 && b.stat.games >= 40 && players.person.primaryPosition.type == 'Defenseman'">
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" id="starD" ng-if="b.stat.points >= 30 && b.stat.points <= 44 && players.person.primaryPosition.type == 'Defenseman'">
+																	<td class="star inFlames" ng-if="b.stat.points / b.stat.games >= 0.50 && b.stat.points / b.stat.games < 0.95 && b.stat.games >= 25 && b.stat.games < 40 && players.person.primaryPosition.type == 'Forward'">
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="basic inFlames" ng-if="b.stat.points <= 39 && b.stat.games >= 62 && players.person.primaryPosition.type == 'Forward'">
+																	<td class="star inFlames" ng-if="b.stat.points / b.stat.games >= 0.30 && b.stat.points / b.stat.games < 0.75 && b.stat.games >= 25 && b.stat.games < 40 && players.person.primaryPosition.type == 'Defenseman'">
+																		<i class="fa fa-star fa-2x"></i>
+																	</td>
+																	<td class="basic inFlames" ng-if="(b.stat.points / b.stat.games < 0.5 && players.person.primaryPosition.type == 'Forward') || (b.stat.games < 25 && players.person.primaryPosition.type == 'Forward')">
 																		<i class="fa fa-check fa-2x"></i>
 																	</td>
-																	<td class="basic inFlames" ng-if="b.stat.points <= 29 && b.stat.games <= 61 && players.person.primaryPosition.type == 'Forward'">
-																		<i class="fa fa-check fa-2x"></i>
-																	</td>
-																	<td class="basic inFlames" id="basicD" ng-if="b.stat.points <= 29 && b.stat.points >= 0 && players.person.primaryPosition.type == 'Defenseman'">
+																	<td class="basic inFlames" ng-if="(b.stat.points / b.stat.games < 0.3 && players.person.primaryPosition.type == 'Defenseman') || (b.stat.games < 25 && players.person.primaryPosition.type == 'Defenseman')">
 																		<i class="fa fa-check fa-2x"></i>
 																	</td>
 																	<td class="star inFlames" id="eliteSuperStarG" ng-if="b.stat.savePercentage >= 0.925 && b.stat.games >= 30 &&  players.person.primaryPosition.type == 'Goalie'">
@@ -136,21 +134,21 @@
 																		<i class="fa fa-star fa-2x"></i>
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" ng-if="b.stat.savePercentage >= 0.925 && b.stat.games >= 15 && b.stat.games <= 29 && players.person.primaryPosition.type == 'Goalie'">
+																	<td class="star inFlames" ng-if="b.stat.savePercentage >= 0.925 && b.stat.games >= 15 && b.stat.games < 30 && players.person.primaryPosition.type == 'Goalie'">
 																		<i class="fa fa-star fa-2x"></i>
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" ng-if="b.stat.savePercentage >= 0.917 && b.stat.savePercentage <= 0.924 && b.stat.games >= 30 && players.person.primaryPosition.type == 'Goalie'">
+																	<td class="star inFlames" ng-if="b.stat.savePercentage >= 0.917 && b.stat.savePercentage < 0.925 && b.stat.games >= 30 && players.person.primaryPosition.type == 'Goalie'">
 																		<i class="fa fa-star fa-2x"></i>
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" ng-if="b.stat.savePercentage >= 0.917 && b.stat.savePercentage <= 0.924 && b.stat.games <= 29 && players.person.primaryPosition.type == 'Goalie'">
+																	<td class="star inFlames" ng-if="b.stat.savePercentage >= 0.917 && b.stat.savePercentage < 0.925 && b.stat.games < 30 && players.person.primaryPosition.type == 'Goalie'">
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="star inFlames" id="starG" ng-if="b.stat.savePercentage >= 0.905 && b.stat.savePercentage <= 0.916 && b.stat.games >= 15 && players.person.primaryPosition.type == 'Goalie'">
+																	<td class="star inFlames" id="starG" ng-if="b.stat.savePercentage >= 0.905 && b.stat.savePercentage < 0.917 && b.stat.games >= 15 && players.person.primaryPosition.type == 'Goalie'">
 																		<i class="fa fa-star fa-2x"></i>
 																	</td>
-																	<td class="basic inFlames" id="basicG" ng-if="b.stat.savePercentage <= 0.904 || b.stat.games <= 14 && players.person.primaryPosition.type == 'Goalie'">
+																	<td class="basic inFlames" id="basicG" ng-if="b.stat.savePercentage < 0.905 || b.stat.games < 15 && players.person.primaryPosition.type == 'Goalie'">
 																		<i class="fa fa-check fa-2x"></i>
 																	</td>
 																	<td class="sniper inFlames" id="sniperF" ng-if="b.stat.goals >= 30 && players.person.primaryPosition.type == 'Forward'">
@@ -387,7 +385,7 @@
 	
 	
 	<!-- STANDINGS -->
-	<section class="section">
+	<section id="standings" class="section">
 			<div id="standings" class="standings">
 					<h2>Standings</h2>
 					<div class="container-fluid">
@@ -588,10 +586,10 @@
 					
 
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.7.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/myscripts.js"></script>
 
 </body>
